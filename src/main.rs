@@ -21,13 +21,13 @@ fn index() -> Markup {
     })
 }
 
-#[get("/s/favicon.svg")]
+#[get("/favicon.svg")]
 fn favicon() -> Stream<Cursor<Vec<u8>>> {
     let data = FILES.get("data/favicon.svg").expect("Favicon not found").into_owned();
     Stream::from(Cursor::new(Vec::from(data)))
 }
 
-#[get("/s/style.css")]
+#[get("/style.css")]
 fn style() -> Stream<Cursor<Vec<u8>>> {
     let data = FILES.get("data/style.css").expect("Stylesheet not found").into_owned();
     Stream::from(Cursor::new(Vec::from(data)))
@@ -47,10 +47,10 @@ fn template_base(title: &str, markup: Markup) -> Markup {
         html lang="en" {
             head {
                 meta charset="utf-8";
-                link rel="preload" href="/s/favicon.svg" as="image";
-                link rel="preload" href="/s/style.css" as="style";
-                link rel="stylesheet" href="/s/style.css";
-                link rel="shortcut icon" href="/s/favicon.svg" type="image/x-icon";
+                link rel="preload" href="/favicon.svg" as="image";
+                link rel="preload" href="/style.css" as="style";
+                link rel="stylesheet" href="/style.css";
+                link rel="shortcut icon" href="/favicon.svg" type="image/x-icon";
                 title { (title) }
             }
             body { (markup) }
