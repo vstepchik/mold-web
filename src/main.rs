@@ -1,12 +1,20 @@
 #![feature(plugin, proc_macro_hygiene)]
 #![plugin(rocket_codegen)]
 
+extern crate includedir;
 extern crate maud;
+extern crate phf;
 extern crate rocket;
 
-mod js;
 use maud::{DOCTYPE, html, Markup};
 use rocket::Request;
+use rocket::response::Stream;
+use std::env;
+use std::io::Cursor;
+
+mod js;
+
+include!(concat!(env!("OUT_DIR"), "/data.rs"));
 
 #[get("/")]
 fn index() -> Markup {
@@ -17,13 +25,19 @@ fn index() -> Markup {
             "canvas{position:absolute;border:0 solid;box-shadow:inset 0 0 80px #4162a9;transform:translateZ(0);width:100%;height:100%;}"
         }
         canvas width="1000" height="1000" {}
-        script type="text/javascript" src="particles.js" {}
+        script type="text/javascript" src="/s/particles.js" {}
     })
 }
 
-#[get("/particles.js")]
-fn script() -> &'static str {
+#[get("/s/particles.js")]
+fn particles() -> &'static str {
     js::PARTICLES
+}
+
+#[get("/s/favicon.svg")]
+fn favicon() -> Stream<Cursor<Vec<u8>>> {
+    let mut data = FILES.get("data/favicon.svg").expect("Favicon not found").into_owned();
+    Stream::from(Cursor::new(Vec::from(data)))
 }
 
 #[catch(404)]
@@ -40,6 +54,7 @@ fn template_base(title: &str, markup: Markup) -> Markup {
         html lang="en" {
             head {
                 meta charset="utf-8";
+                link rel="shortcut icon" href="/s/favicon.svg" type="image/x-icon";
                 title { (title) }
             }
             body { (markup) }
@@ -49,10 +64,16 @@ fn template_base(title: &str, markup: Markup) -> Markup {
 
 fn rocket() -> rocket::Rocket {
     rocket::ignite()
-        .mount("/", routes![index, script])
+        .mount("/", routes![favicon, index, particles])
         .catch(catchers![not_found])
 }
 
 fn main() {
+    FILES.set_passthrough(env::var_os("PASSTHROUGH").is_some());
+
+    for name in FILES.file_names() {
+        println!("Found: {}", name);
+    }
+
     rocket().launch();
 }
