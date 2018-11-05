@@ -1,11 +1,12 @@
 #![feature(plugin, proc_macro_hygiene)]
-#![plugin(rocket_codegen)]
+#![plugin(rocket_codegen, phf_macros)]
 
 extern crate includedir;
 extern crate maud;
 extern crate phf;
 extern crate rocket;
 
+use crate::markup::ARTICLES;
 use maud::Markup;
 use rocket::Request;
 use rocket::response::Stream;
@@ -19,6 +20,11 @@ include!(concat!(env!("OUT_DIR"), "/data.rs"));
 #[get("/")]
 fn index() -> Markup {
     markup::index()
+}
+
+#[get("/a/<id>")]
+fn article(id: String) -> Option<Markup> {
+    ARTICLES.get(id.as_str()).map(|a| a.render())
 }
 
 #[get("/favicon.svg")]
@@ -40,7 +46,7 @@ fn not_found(req: &Request) -> Markup {
 
 fn rocket() -> rocket::Rocket {
     rocket::ignite()
-        .mount("/", routes![favicon, style, index])
+        .mount("/", routes![favicon, style, index, article])
         .catch(catchers![not_found])
 }
 
