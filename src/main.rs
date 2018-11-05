@@ -6,19 +6,19 @@ extern crate maud;
 extern crate phf;
 extern crate rocket;
 
-use maud::{DOCTYPE, html, Markup};
+use maud::Markup;
 use rocket::Request;
 use rocket::response::Stream;
 use std::env;
 use std::io::Cursor;
 
+mod markup;
+
 include!(concat!(env!("OUT_DIR"), "/data.rs"));
 
 #[get("/")]
 fn index() -> Markup {
-    template_base("Home", html! {
-        p { "Hello" }
-    })
+    markup::index()
 }
 
 #[get("/favicon.svg")]
@@ -35,27 +35,7 @@ fn style() -> Stream<Cursor<Vec<u8>>> {
 
 #[catch(404)]
 fn not_found(req: &Request) -> Markup {
-    template_base("404", html! {
-        h1 { "404: Hey! There's nothing here." }
-        "The page at " (req.uri().as_str()) " does not exist!"
-    })
-}
-
-fn template_base(title: &str, markup: Markup) -> Markup {
-    html! {
-        (DOCTYPE)
-        html lang="en" {
-            head {
-                meta charset="utf-8";
-                link rel="preload" href="/favicon.svg" as="image";
-                link rel="preload" href="/style.css" as="style";
-                link rel="stylesheet" href="/style.css";
-                link rel="shortcut icon" href="/favicon.svg" type="image/x-icon";
-                title { (title) }
-            }
-            body { (markup) }
-        }
-    }
+    markup::e404(req)
 }
 
 fn rocket() -> rocket::Rocket {
