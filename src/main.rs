@@ -12,31 +12,24 @@ use rocket::response::Stream;
 use std::env;
 use std::io::Cursor;
 
-mod js;
-
 include!(concat!(env!("OUT_DIR"), "/data.rs"));
 
 #[get("/")]
 fn index() -> Markup {
     template_base("Home", html! {
-        style {
-            "*{margin:0;padding:0;}"
-            "body{background:#222;}"
-            "canvas{position:absolute;border:0 solid;box-shadow:inset 0 0 80px #4162a9;transform:translateZ(0);width:100%;height:100%;}"
-        }
-        canvas width="1000" height="1000" {}
-        script type="text/javascript" src="/s/particles.js" {}
+        p { "Hello" }
     })
-}
-
-#[get("/s/particles.js")]
-fn particles() -> &'static str {
-    js::PARTICLES
 }
 
 #[get("/s/favicon.svg")]
 fn favicon() -> Stream<Cursor<Vec<u8>>> {
-    let mut data = FILES.get("data/favicon.svg").expect("Favicon not found").into_owned();
+    let data = FILES.get("data/favicon.svg").expect("Favicon not found").into_owned();
+    Stream::from(Cursor::new(Vec::from(data)))
+}
+
+#[get("/s/style.css")]
+fn style() -> Stream<Cursor<Vec<u8>>> {
+    let data = FILES.get("data/style.css").expect("Stylesheet not found").into_owned();
     Stream::from(Cursor::new(Vec::from(data)))
 }
 
@@ -54,6 +47,9 @@ fn template_base(title: &str, markup: Markup) -> Markup {
         html lang="en" {
             head {
                 meta charset="utf-8";
+                link rel="preload" href="/s/favicon.svg" as="image";
+                link rel="preload" href="/s/style.css" as="style";
+                link rel="stylesheet" href="/s/style.css";
                 link rel="shortcut icon" href="/s/favicon.svg" type="image/x-icon";
                 title { (title) }
             }
@@ -64,7 +60,7 @@ fn template_base(title: &str, markup: Markup) -> Markup {
 
 fn rocket() -> rocket::Rocket {
     rocket::ignite()
-        .mount("/", routes![favicon, index, particles])
+        .mount("/", routes![favicon, style, index])
         .catch(catchers![not_found])
 }
 
