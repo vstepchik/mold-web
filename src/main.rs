@@ -1,4 +1,4 @@
-#![feature(plugin, proc_macro, proc_macro_non_items)]
+#![feature(plugin, proc_macro_hygiene)]
 #![plugin(rocket_codegen)]
 
 extern crate maud;
@@ -127,10 +127,10 @@ fn script() -> &'static str {
     r##"window.onload=function(){var t=document.querySelector("canvas"),e=t.getContext("2d"),a=[],n=window.innerWidth,r=window.innerHeight,o=n*r/2e4,i=1,h=["#f35d4f","#b08ee3","#b5d98c","#6ddaf1","#f1e85b"];function d(){this.x=Math.round(Math.random()*n),this.y=Math.round(Math.random()*r),this.rad=Math.round(5*Math.random())+2,this.rgba=h[Math.floor(Math.random()*h.length)],this.vx=y(2),this.vy=y(2),this.ex=y(i)/n,this.ey=y(i)/r}function s(t){for(var a=0;a<t.length;a++){for(var o=t[a],h=a;h<t.length;h++){var d=t[h];s=o,l=d,Math.sqrt(Math.pow(l.x-s.x,2)+Math.pow(l.y-s.y,2))<50&&(e.strokeStyle=o.rgba,e.beginPath(),e.moveTo(o.x,o.y),e.lineTo(d.x,d.y),e.stroke())}e.fillStyle=o.rgba,e.strokeStyle=o.rgba,e.beginPath(),e.arc(o.x,o.y,o.rad,0,2*Math.PI,!0),e.fill(),e.closePath(),e.beginPath(),e.arc(o.x,o.y,o.rad+5,0,2*Math.PI,!0),e.stroke(),e.closePath(),o.x+=o.vx,o.y+=o.vy,o.vx+=o.ex,o.vy+=o.ey,o.x>n&&(o.x=0,o.ex=y(i)/n),o.x<0&&(o.x=n,o.ex=y(i)/n),o.y>r&&(o.y=0,o.ey=y(i)/r),o.y<0&&(o.y=r,o.ey=y(i)/r)}var s,l}function y(t){return Math.random()*t-t/2}t.width=n,t.height=r,e.globalCompositeOperation="lighter",e.linewidth=.5,window.requestAnimFrame=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||function(t){window.setTimeout(t,1e3/30)},function(){for(var t=0;t<o;t++){var e=new d;a[e.rgba]=a[e.rgba]||[],a[e.rgba].push(e)}}(),function t(){e.clearRect(0,0,n,r);for(var o=0;o<h.length;o++)s(a[h[o]]);requestAnimFrame(t)}()};"##
 }
 
-#[error(404)]
+#[catch(404)]
 fn not_found(req: &Request) -> Markup {
     template_base("404", html! {
-        h1 "404: Hey! There's nothing here."
+        h1 { "404: Hey! There's nothing here." }
         "The page at " (req.uri().as_str()) " does not exist!"
     })
 }
@@ -141,9 +141,9 @@ fn template_base(title: &str, markup: Markup) -> Markup {
         html lang="en" {
             head {
                 meta charset="utf-8";
-                title (title)
+                title { (title) }
             }
-            body (markup)
+            body { (markup) }
         }
     }
 }
@@ -151,7 +151,7 @@ fn template_base(title: &str, markup: Markup) -> Markup {
 fn rocket() -> rocket::Rocket {
     rocket::ignite()
         .mount("/", routes![index, script])
-        .catch(errors![not_found])
+        .catch(catchers![not_found])
 }
 
 fn main() {
