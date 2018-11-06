@@ -27,9 +27,9 @@ fn header() -> Markup {
     html! {
         div id="header" {
             a href=("/") {
-                img#logo src=(LOGO_URL);
+                img#logo src=(LOGO_URL) width="0" height="0";
             }
-            img#themeIcon src=(THEME_ICON_URL)
+            img#themeIcon src=(THEME_ICON_URL) width="0" height="0"
                 onclick="document.cookie = \"night=\" + \
                 document.documentElement.classList.toggle(\"night\") + \"; path=/; \
                 expires=Fri, 31 Dec 9999 23:59:59 GMT\"";
