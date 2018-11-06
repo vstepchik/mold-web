@@ -7,17 +7,15 @@ extern crate phf;
 extern crate rocket;
 
 use crate::markup::ARTICLES;
+use crate::static_res::StaticResource;
 use maud::Markup;
 use rocket::http::Cookies;
 use rocket::Request;
-use rocket::response::Stream;
-use std::env;
-use std::io::Cursor;
 
 mod markup;
 mod cookies;
+mod static_res;
 
-include!(concat!(env!("OUT_DIR"), "/data.rs"));
 
 #[get("/")]
 fn index(cookies: Cookies) -> Markup {
@@ -32,9 +30,8 @@ fn article(id: String, cookies: Cookies) -> Option<Markup> {
 }
 
 #[get("/s/<file>")]
-fn static_res(file: String) -> Option<Stream<Cursor<Vec<u8>>>> {
-    FILES.get(format!("data/{}", file).as_str()).ok()
-        .map(|data| Stream::from(Cursor::new(Vec::from(data.into_owned()))))
+fn static_res(file: String) -> Option<StaticResource> {
+    StaticResource::new(file.as_str())
 }
 
 #[catch(404)]
@@ -49,11 +46,5 @@ fn rocket() -> rocket::Rocket {
 }
 
 fn main() {
-    FILES.set_passthrough(env::var_os("PASSTHROUGH").is_some());
-
-    for name in FILES.file_names() {
-        println!("Found: {}", name);
-    }
-
     rocket().launch();
 }
