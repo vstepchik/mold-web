@@ -27,16 +27,10 @@ fn article(id: String) -> Option<Markup> {
     ARTICLES.get(id.as_str()).map(|a| a.render())
 }
 
-#[get("/favicon.svg")]
-fn favicon() -> Stream<Cursor<Vec<u8>>> {
-    let data = FILES.get("data/favicon.svg").expect("Favicon not found").into_owned();
-    Stream::from(Cursor::new(Vec::from(data)))
-}
-
-#[get("/style.css")]
-fn style() -> Stream<Cursor<Vec<u8>>> {
-    let data = FILES.get("data/style.css").expect("Stylesheet not found").into_owned();
-    Stream::from(Cursor::new(Vec::from(data)))
+#[get("/s/<file>")]
+fn static_res(file: String) -> Option<Stream<Cursor<Vec<u8>>>> {
+    let file = format!("data/{}", file);
+    FILES.get(file.as_str()).map(|data| Stream::from(Cursor::new(Vec::from(data.into_owned())))).ok()
 }
 
 #[catch(404)]
@@ -46,7 +40,7 @@ fn not_found(req: &Request) -> Markup {
 
 fn rocket() -> rocket::Rocket {
     rocket::ignite()
-        .mount("/", routes![favicon, style, index, article])
+        .mount("/", routes![static_res, index, article])
         .catch(catchers![not_found])
 }
 
