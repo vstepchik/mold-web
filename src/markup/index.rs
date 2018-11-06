@@ -8,7 +8,7 @@ pub fn index() -> Markup {
     template_base("Home", html! {
         p { "Hello" }
         ul {
-            @for (id, _article) in ARTICLES.entries() {
+            @for (id, _article) in ARTICLES.entries().rev() {
                 li {
                     a href={ (ARTICLE_URL_PREFIX) "/" (id) } { (id) }
                 }
