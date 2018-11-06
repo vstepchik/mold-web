@@ -1,118 +1,90 @@
-<?xml version="1.0" ?>
 <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-    <title/>
-    <g data-name="DAy 02" id="611ab810-d4f3-4319-8602-7781efbdacdc">
-        <path d="M41.19,42A54.83,54.83,0,0,1,38.5,59h-13a55.06,55.06,0,0,1,0-34h13A54.83,54.83,0,0,1,41.19,42Z"
-              data-name="&lt;Path&gt;" fill="#8a9fc1" id="c95da4b7-4f0c-4272-9a2e-96dbdf30695e"/>
-        <path d="M37.19,42A54.83,54.83,0,0,1,34.5,59h-9a55.06,55.06,0,0,1,0-34h9A54.83,54.83,0,0,1,37.19,42Z"
-              data-name="&lt;Path&gt;" fill="#b0c1e2" id="b02ecbb8-1337-40d5-b976-9b883fefa29e"/>
-        <circle cx="26.5" cy="42.5" data-name="&lt;Path&gt;" fill="#323be0" id="d9f040ac-c1ee-4aaf-8f45-8919823d4237"
-                r="1.5"/>
-        <circle cx="25.5" cy="53.5" data-name="&lt;Path&gt;" fill="#323be0" id="28642c7b-d9ae-410d-85f9-b281064cd898"
-                r="2.5"/>
-        <circle cx="36" cy="46" data-name="&lt;Path&gt;" fill="#323be0" id="624bd7da-0840-4719-9895-b693dae3cb4d"
-                r="2"/>
-        <path d="M41.19,42A54.83,54.83,0,0,1,38.5,59h-13a55.06,55.06,0,0,1,0-34h13A54.83,54.83,0,0,1,41.19,42Z"
-              data-name="&lt;Path&gt;" fill="none" id="87461783-de3b-4b9c-a792-9719512f4730" stroke="#001c63"
-              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path d="M41.19,42l-4,.56L34,43l-1-5-2,3-8.19,1A54.83,54.83,0,0,1,25.5,25h13A54.83,54.83,0,0,1,41.19,42Z"
-              data-name="&lt;Path&gt;" fill="#7488a3" id="cf0004a5-5baf-468c-83de-f1e4a94e4f88"/>
-        <path d="M37.19,42c0,.19,0,.37,0,.56L34,43l-1-5-2,3-8.19,1A54.83,54.83,0,0,1,25.5,25h9A54.83,54.83,0,0,1,37.19,42Z"
-              data-name="&lt;Path&gt;" fill="#94a6c4" id="ddc55b93-6234-4e40-9a5e-893572612b28"/>
-        <circle cx="24" cy="36" data-name="&lt;Path&gt;" fill="#323be0" id="e86602d9-648f-469e-9a75-ab5a4b5cb591"
-                r="2"/>
-        <path d="M41.19,42,34,43l-1-5-2,3-8.19,1A54.85,54.85,0,0,1,25.5,25h13A54.83,54.83,0,0,1,41.19,42Z"
-              data-name="&lt;Path&gt;" fill="none" id="e1bdc8d6-b509-4eea-a7ca-063106f17776" stroke="#001c63"
-              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path d="M58,30H7c2.75-1.57,4.33-5,6.18-8.64S17.17,13.7,21,11A17.79,17.79,0,0,1,29.4,8.14c.31,0,.63-.06.95-.07C30.88,8,31.43,8,32,8s1,0,1.51,0C43.49,8.4,48,13.22,51,18.35c1.23,2.14,2.18,4.32,3.12,6.26C55.25,26.94,56.39,28.92,58,30Z"
-              data-name="&lt;Path&gt;" fill="#6c73f4" id="49cd001c-f4b9-4a2b-a573-91fda2e49057"/>
-        <path d="M54,30H7c2.75-1.57,4.33-5,6.18-8.64S17.17,13.7,21,11A17.79,17.79,0,0,1,29.4,8.14c.31,0,.63.17.95.16,1.28.08,2.47-.3,3.57.7h0c7,1,10.57,5.28,13,9.58,1.23,2.14,2.18,4.21,3.12,6.15C51.25,27.06,52.39,28.92,54,30Z"
-              data-name="&lt;Path&gt;" fill="#323be0" id="bab283b1-1ab1-49c4-bebc-7ff5f2c6e723"/>
-        <path d="M54,30H14c2.75-1.57,4.33-5,6.18-8.64s4-7.43,7.86-10.08A10.51,10.51,0,0,1,33.92,9h0c7,1,10.57,5.28,13,9.58,1.23,2.14,2.18,4.21,3.12,6.15C51.25,27.06,52.39,28.92,54,30Z"
-              data-name="&lt;Path&gt;" fill="#4c4eff" id="c6039cc6-2c5c-4aef-938f-3cbd60973d0c"/>
-        <path d="M24,16.5a6.5,6.5,0,0,1-10.82,4.86C15,17.66,17.17,13.7,21,11A6.47,6.47,0,0,1,24,16.5Z"
-              data-name="&lt;Path&gt;" fill="#7782ed" id="4d1d90ba-905b-4bf0-be23-79eed0802b31"/>
-        <ellipse cx="40.5" cy="16" data-name="&lt;Path&gt;" fill="#7782ed" id="8ac68c69-d467-400b-b7cd-0bd45515aceb"
-                 rx="3.5" ry="3"/>
-        <path d="M39,29.5a2.74,2.74,0,0,1,0,.5H25a2.74,2.74,0,0,1,0-.5c0-3,3.13-5.5,7-5.5S39,26.46,39,29.5Z"
-              data-name="&lt;Path&gt;" fill="#7782ed" id="ac672b1a-fb15-4d34-98cc-25073d6ebd2f"/>
-        <path d="M54.1,24.61a3.44,3.44,0,0,1-1.6.39A3.5,3.5,0,0,1,51,18.35C52.21,20.49,53.16,22.67,54.1,24.61Z"
-              data-name="&lt;Path&gt;" fill="#9ca8ff" id="2d376c25-4dda-473b-befa-6e6b2b77fd9b"/>
-        <path d="M34,9.5a2.5,2.5,0,1,1-4.6-1.36C30.22,8.06,31.09,8,32,8c.52,0,1,0,1.51,0A2.46,2.46,0,0,1,34,9.5Z"
-              data-name="&lt;Path&gt;" fill="#7782ed" id="80123cf1-999b-402c-839a-22c9a2f29af9"/>
-        <circle cx="17" cy="27" data-name="&lt;Path&gt;" fill="#7782ed" id="44c305a2-7d58-4751-8fce-34b6697b8ae2"
-                r="2"/>
-        <path d="M58,30C51.67,25.75,52.68,7.85,32,8,13.34,8.14,14.42,25.77,7,30Z" data-name="&lt;Path&gt;" fill="none"
-              id="d9dc8d0c-20e0-4df8-b60f-f069ac9af85a" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round"
+    <g data-name="DAy 02">
+        <path d="M41.2 42a54.8 54.8 0 0 1-2.7 17h-13a55 55 0 0 1 0-34h13a54.8 54.8 0 0 1 2.7 17z"
+              data-name="&lt;Path&gt;" fill="#8a9fc1"/>
+        <path d="M37.2 42a54.8 54.8 0 0 1-2.7 17h-9a55 55 0 0 1 0-34h9a54.8 54.8 0 0 1 2.7 17z" data-name="&lt;Path&gt;"
+              fill="#b0c1e2"/>
+        <circle cx="26.5" cy="42.5" data-name="&lt;Path&gt;" fill="#323be0" r="1.5"/>
+        <circle cx="25.5" cy="53.5" data-name="&lt;Path&gt;" fill="#323be0" r="2.5"/>
+        <circle cx="36" cy="46" data-name="&lt;Path&gt;" fill="#323be0" r="2"/>
+        <path d="M41.2 42a54.8 54.8 0 0 1-2.7 17h-13a55 55 0 0 1 0-34h13a54.8 54.8 0 0 1 2.7 17z"
+              data-name="&lt;Path&gt;" fill="none" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round"
               stroke-width="2"/>
-        <path d="M16,45s-.18,13.37,9,14" data-name="&lt;Path&gt;" fill="none" id="a628c057-0de9-4b36-a3c3-27f0cc23d110"
-              stroke="#001c63" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path d="M12,51a16.35,16.35,0,0,0,13,8" data-name="&lt;Path&gt;" fill="none"
-              id="58c513ac-76c8-4010-a599-ccb5102a2247" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round"
+        <path d="M41.2 42l-4 .6-3.2.4-1-5-2 3-8.2 1a54.8 54.8 0 0 1 2.7-17h13a54.8 54.8 0 0 1 2.7 17z"
+              data-name="&lt;Path&gt;" fill="#7488a3"/>
+        <path d="M37.2 42v.6L34 43l-1-5-2 3-8.2 1a54.8 54.8 0 0 1 2.7-17h9a54.8 54.8 0 0 1 2.7 17z"
+              data-name="&lt;Path&gt;" fill="#94a6c4"/>
+        <circle cx="24" cy="36" data-name="&lt;Path&gt;" fill="#323be0" r="2"/>
+        <path d="M41.2 42L34 43l-1-5-2 3-8.2 1a54.9 54.9 0 0 1 2.7-17h13a54.8 54.8 0 0 1 2.7 17z"
+              data-name="&lt;Path&gt;" fill="none" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round"
               stroke-width="2"/>
-        <path d="M20,44a6.53,6.53,0,0,1-.08,1H12.08A6.53,6.53,0,0,1,12,44a4.93,4.93,0,0,1,3-4.84A3.32,3.32,0,0,1,16,39C18.21,39,20,41.24,20,44Z"
-              data-name="&lt;Path&gt;" fill="#fc9e5e" id="d6acb5ee-0988-40f7-b109-88986c0d4657"/>
-        <path d="M18,44a6.53,6.53,0,0,1-.08,1H12.08A6.53,6.53,0,0,1,12,44a4.93,4.93,0,0,1,3-4.84A4.93,4.93,0,0,1,18,44Z"
-              data-name="&lt;Path&gt;" fill="#ef8e45" id="6db3efae-6487-4c02-9713-5ebb2723bb9a"/>
-        <circle cx="14" cy="42" data-name="&lt;Path&gt;" fill="#ff001a" id="d2b0d4a8-5282-4ca7-bfd7-72f6feff1a10"
-                r="1"/>
-        <circle cx="16.5" cy="41.5" data-name="&lt;Path&gt;" fill="#ff001a" id="0458dc8a-c3a2-4363-abb0-0425d7f8a59d"
-                r="0.5"/>
-        <circle cx="18" cy="44" data-name="&lt;Path&gt;" fill="#ff001a" id="481ab053-d715-423e-85ea-46ce059a7f3b"
-                r="1"/>
-        <path d="M20,44a6.53,6.53,0,0,1-.08,1H12.08A6.53,6.53,0,0,1,12,44c0-2.76,1.79-5,4-5S20,41.24,20,44Z"
-              data-name="&lt;Path&gt;" fill="none" id="42e15b72-5759-4939-8a7e-6dff61aa70ec" stroke="#001c63"
-              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path d="M51,47.25a4.9,4.9,0,0,1-.06.75H45.06a4.9,4.9,0,0,1-.06-.75c0-2.07,1.34-3.75,3-3.75S51,45.18,51,47.25Z"
-              data-name="&lt;Path&gt;" fill="none" id="1e1193a8-c368-4957-ad81-ee3259b0c671" stroke="#001c63"
-              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path d="M51,47.25a4.9,4.9,0,0,1-.06.75H45.06a4.9,4.9,0,0,1-.06-.75c0-2.07,1.34-3.75,3-3.75S51,45.18,51,47.25Z"
-              data-name="&lt;Path&gt;" fill="none" id="df1273e1-751b-490f-b14d-046dd6b33c70" stroke="#001c63"
-              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path d="M51,47.25a4.9,4.9,0,0,1-.06.75H45.06a4.9,4.9,0,0,1-.06-.75c0-2.07,1.34-3.75,3-3.75S51,45.18,51,47.25Z"
-              data-name="&lt;Path&gt;" fill="none" id="4b397560-b2bb-4ced-91b7-4abb6208ef38" stroke="#001c63"
-              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path d="M51,47.25a4.9,4.9,0,0,1-.06.75H45.06a4.9,4.9,0,0,1-.06-.75c0-2.07,1.34-3.75,3-3.75S51,45.18,51,47.25Z"
-              data-name="&lt;Path&gt;" fill="#ef8e45" id="25673661-15f0-4528-9140-679fa2e2717a"/>
-        <path d="M51,47.25a4.56,4.56,0,0,1-.06.75H45.06a4.56,4.56,0,0,1-.06-.75,3.77,3.77,0,0,1,2-3.53,2.43,2.43,0,0,1,1-.22C49.66,43.5,51,45.18,51,47.25Z"
-              data-name="&lt;Path&gt;" fill="#fc9e5e" id="af7eb8f0-7b49-4088-b53e-f35af0efa0c6"/>
-        <path d="M49,47.25a4.56,4.56,0,0,1-.06.75H45.06a4.56,4.56,0,0,1-.06-.75,3.77,3.77,0,0,1,2-3.53A3.77,3.77,0,0,1,49,47.25Z"
-              data-name="&lt;Path&gt;" fill="#ef8e45" id="45bab2b5-b554-47b3-94af-cfa6f2ca36eb"/>
-        <circle cx="46" cy="45" data-name="&lt;Path&gt;" fill="#ff001a" id="9f0acb22-d538-4a81-8d10-fd39d6df1352"
-                r="1"/>
-        <circle cx="48.5" cy="44.5" data-name="&lt;Path&gt;" fill="#ff001a" id="3a2455cc-340c-4837-9d77-760f05190470"
-                r="0.5"/>
-        <circle cx="50" cy="47" data-name="&lt;Path&gt;" fill="#ff001a" id="a8752288-9015-4ff4-9724-55654bdbdb45"
-                r="1"/>
-        <path d="M51,47.25a4.9,4.9,0,0,1-.06.75H45.06a4.9,4.9,0,0,1-.06-.75c0-2.07,1.34-3.75,3-3.75S51,45.18,51,47.25Z"
-              data-name="&lt;Path&gt;" fill="none" id="9b3d4309-07fa-4fe6-bde5-067fccd89e75" stroke="#001c63"
-              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <path d="M14,50.38a4.08,4.08,0,0,1-.05.63H9.05A4.08,4.08,0,0,1,9,50.38c0-1.73,1.12-3.12,2.5-3.12S14,48.65,14,50.38Z"
-              data-name="&lt;Path&gt;" fill="#4c4eff" id="f4f99a19-3124-4ee3-8b1a-73fce74c0366"/>
-        <path d="M14,50.38a4.08,4.08,0,0,1-.05.63H9.05A4.08,4.08,0,0,1,9,50.38c0-1.73,1.12-3.12,2.5-3.12S14,48.65,14,50.38Z"
-              data-name="&lt;Path&gt;" fill="none" id="63dddd26-e062-4aed-969d-ca0e096ac049" stroke="#001c63"
-              stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-        <g data-name="&lt;Group&gt;" id="44a70d73-4aac-429c-9499-d8e6cf149516">
-            <path d="M55,58c-3,0-3-2-6-2s-3,2-6,2-3-2-6-2" data-name="&lt;Path&gt;" fill="none"
-                  id="7511e2b5-b8b3-4d31-a791-0cf11c45730e" stroke="#001c63" stroke-linecap="round"
-                  stroke-linejoin="round" stroke-width="2"/>
+        <path d="M58 30H7c2.8-1.6 4.3-5 6.2-8.6s4-7.7 7.8-10.4a17.8 17.8 0 0 1 8.4-2.9h1L32 8h1.5c10 .4 14.5 5.2 17.5 10.4 1.2 2 2.2 4.3 3.1 6.2C55.2 27 56.4 29 58 30z"
+              data-name="&lt;Path&gt;" fill="#6c73f4"/>
+        <path d="M54 30H7c2.8-1.6 4.3-5 6.2-8.6s4-7.7 7.8-10.4a17.8 17.8 0 0 1 8.4-2.9l1 .2c1.2 0 2.4-.3 3.5.7 7 1 10.6 5.3 13 9.6 1.2 2.1 2.2 4.2 3.1 6.1 1.3 2.4 2.4 4.2 4 5.3z"
+              data-name="&lt;Path&gt;" fill="#323be0"/>
+        <path d="M54 30H14c2.8-1.6 4.3-5 6.2-8.6s4-7.5 7.8-10.1A10.5 10.5 0 0 1 34 9c7 1 10.5 5.3 13 9.6 1.2 2.1 2.1 4.2 3 6.1 1.3 2.4 2.4 4.2 4 5.3z"
+              data-name="&lt;Path&gt;" fill="#4c4eff"/>
+        <path d="M24 16.5a6.5 6.5 0 0 1-10.8 4.9c1.8-3.7 4-7.7 7.8-10.4a6.5 6.5 0 0 1 3 5.5z" data-name="&lt;Path&gt;"
+              fill="#7782ed"/>
+        <ellipse cx="40.5" cy="16" data-name="&lt;Path&gt;" fill="#7782ed" rx="3.5" ry="3"/>
+        <path d="M39 29.5a2.7 2.7 0 0 1 0 .5H25a2.7 2.7 0 0 1 0-.5c0-3 3.1-5.5 7-5.5s7 2.5 7 5.5z"
+              data-name="&lt;Path&gt;" fill="#7782ed"/>
+        <path d="M54.1 24.6a3.4 3.4 0 0 1-1.6.4 3.5 3.5 0 0 1-1.5-6.6c1.2 2 2.2 4.3 3.1 6.2z" data-name="&lt;Path&gt;"
+              fill="#9ca8ff"/>
+        <path d="M34 9.5a2.5 2.5 0 1 1-4.6-1.4L32 8h1.5a2.5 2.5 0 0 1 .5 1.5z" data-name="&lt;Path&gt;" fill="#7782ed"/>
+        <circle cx="17" cy="27" data-name="&lt;Path&gt;" fill="#7782ed" r="2"/>
+        <path d="M58 30c-6.3-4.3-5.3-22.1-26-22-18.7.1-17.6 17.8-25 22zM16 45s-.2 13.4 9 14M12 51a16.4 16.4 0 0 0 13 8"
+              data-name="&lt;Path&gt;" fill="none" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"/>
+        <path d="M20 44a6.5 6.5 0 0 1 0 1h-8a6.5 6.5 0 0 1 0-1 5 5 0 0 1 3-4.8 3.3 3.3 0 0 1 1-.2c2.2 0 4 2.2 4 5z"
+              data-name="&lt;Path&gt;" fill="#fc9e5e"/>
+        <path d="M18 44a6.5 6.5 0 0 1 0 1h-6a6.5 6.5 0 0 1 0-1 5 5 0 0 1 3-4.8 5 5 0 0 1 3 4.8z"
+              data-name="&lt;Path&gt;" fill="#ef8e45"/>
+        <circle cx="14" cy="42" data-name="&lt;Path&gt;" fill="#ff001a" r="1"/>
+        <circle cx="16.5" cy="41.5" data-name="&lt;Path&gt;" fill="#ff001a" r=".5"/>
+        <circle cx="18" cy="44" data-name="&lt;Path&gt;" fill="#ff001a" r="1"/>
+        <path d="M20 44a6.5 6.5 0 0 1 0 1h-8a6.5 6.5 0 0 1 0-1c0-2.8 1.8-5 4-5s4 2.2 4 5zM51 47.3a4.9 4.9 0 0 1 0 .7h-6a4.9 4.9 0 0 1 0-.8c0-2 1.3-3.7 3-3.7s3 1.7 3 3.8z"
+              data-name="&lt;Path&gt;" fill="none" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"/>
+        <path d="M51 47.3a4.9 4.9 0 0 1 0 .7h-6a4.9 4.9 0 0 1 0-.8c0-2 1.3-3.7 3-3.7s3 1.7 3 3.8z"
+              data-name="&lt;Path&gt;" fill="none" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"/>
+        <path d="M51 47.3a4.9 4.9 0 0 1 0 .7h-6a4.9 4.9 0 0 1 0-.8c0-2 1.3-3.7 3-3.7s3 1.7 3 3.8z"
+              data-name="&lt;Path&gt;" fill="none" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"/>
+        <path d="M51 47.3a4.9 4.9 0 0 1 0 .7h-6a4.9 4.9 0 0 1 0-.8c0-2 1.3-3.7 3-3.7s3 1.7 3 3.8z"
+              data-name="&lt;Path&gt;" fill="#ef8e45"/>
+        <path d="M51 47.3a4.6 4.6 0 0 1 0 .7h-6a4.6 4.6 0 0 1 0-.8 3.8 3.8 0 0 1 2-3.5 2.4 2.4 0 0 1 1-.2c1.7 0 3 1.7 3 3.8z"
+              data-name="&lt;Path&gt;" fill="#fc9e5e"/>
+        <path d="M49 47.3a4.6 4.6 0 0 1 0 .7h-4a4.6 4.6 0 0 1 0-.8 3.8 3.8 0 0 1 2-3.5 3.8 3.8 0 0 1 2 3.5z"
+              data-name="&lt;Path&gt;" fill="#ef8e45"/>
+        <circle cx="46" cy="45" data-name="&lt;Path&gt;" fill="#ff001a" r="1"/>
+        <circle cx="48.5" cy="44.5" data-name="&lt;Path&gt;" fill="#ff001a" r=".5"/>
+        <circle cx="50" cy="47" data-name="&lt;Path&gt;" fill="#ff001a" r="1"/>
+        <path d="M51 47.3a4.9 4.9 0 0 1 0 .7h-6a4.9 4.9 0 0 1 0-.8c0-2 1.3-3.7 3-3.7s3 1.7 3 3.8z"
+              data-name="&lt;Path&gt;" fill="none" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2"/>
+        <path d="M14 50.4a4 4 0 0 1 0 .6H9a4 4 0 0 1 0-.6c0-1.7 1.1-3.1 2.5-3.1s2.5 1.4 2.5 3z" data-name="&lt;Path&gt;"
+              fill="#4c4eff"/>
+        <path d="M14 50.4a4 4 0 0 1 0 .6H9a4 4 0 0 1 0-.6c0-1.7 1.1-3.1 2.5-3.1s2.5 1.4 2.5 3z" data-name="&lt;Path&gt;"
+              fill="none" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <g data-name="&lt;Group&gt;">
+            <path d="M55 58c-3 0-3-2-6-2s-3 2-6 2-3-2-6-2" data-name="&lt;Path&gt;" fill="none" stroke="#001c63"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
         </g>
-        <g data-name="&lt;Group&gt;" id="d4b78092-8447-4a34-8aa8-cb23b6b440ae">
-            <path d="M45,24c0-3,2-3,2-6s-2-3-2-6,2-3,2-6" data-name="&lt;Path&gt;" fill="none"
-                  id="47082f82-db3f-4698-ad8b-b27952dac7e6" stroke="#c713ec" stroke-linecap="round"
-                  stroke-linejoin="round" stroke-width="2"/>
+        <g data-name="&lt;Group&gt;">
+            <path d="M45 24c0-3 2-3 2-6s-2-3-2-6 2-3 2-6" data-name="&lt;Path&gt;" fill="none" stroke="#c713ec"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
         </g>
-        <g data-name="&lt;Group&gt;" id="33b83be4-95bf-42b1-9100-a61929dd5df9">
-            <path d="M50,24c0-2,2-2,2-4s-2-2-2-4,2-2,2-4" data-name="&lt;Path&gt;" fill="none"
-                  id="c2e0304f-a6cc-4484-93e2-5d9e6f103582" stroke="#c713ec" stroke-linecap="round"
-                  stroke-linejoin="round" stroke-width="2"/>
+        <g data-name="&lt;Group&gt;">
+            <path d="M50 24c0-2 2-2 2-4s-2-2-2-4 2-2 2-4" data-name="&lt;Path&gt;" fill="none" stroke="#c713ec"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
         </g>
-        <g data-name="&lt;Group&gt;" id="5877ceb1-042f-4468-b6d9-3dc94e147477">
-            <path d="M39,19c0-2,2-2,2-4s-2-2-2-4,2-2,2-4" data-name="&lt;Path&gt;" fill="none"
-                  id="552d59d5-73a7-49f2-adbf-b14104ea34e6" stroke="#c713ec" stroke-linecap="round"
-                  stroke-linejoin="round" stroke-width="2"/>
+        <g data-name="&lt;Group&gt;">
+            <path d="M39 19c0-2 2-2 2-4s-2-2-2-4 2-2 2-4" data-name="&lt;Path&gt;" fill="none" stroke="#c713ec"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
         </g>
-        <line data-name="&lt;Path&gt;" fill="none" id="0aa8cde8-7d27-4e5d-8e35-f67eef9d77b2" stroke="#001c63"
-              stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="48" x2="48" y1="56" y2="48"/>
+        <path data-name="&lt;Path&gt;" fill="none" stroke="#001c63" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" d="M48 56v-8"/>
     </g>
 </svg>
