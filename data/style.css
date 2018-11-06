@@ -13,27 +13,27 @@ body {
     text-align: justify;
 }
 
-html.inverted {
+html.night {
     background-color: #040404;
 }
 
-html.inverted body {
+html.night body {
     color: #bababa;
 }
 
-html.inverted blockquote {
+html.night blockquote {
     color: #dad0c7;
 }
 
-html.inverted blockquote:before {
+html.night blockquote:before {
     color: #bfbfbf;
 }
 
-html.inverted a {
+html.night a {
     color: #07a;
 }
 
-html.inverted a:visited {
+html.night a:visited {
     color: #ac5a82;
 }
 
@@ -176,6 +176,6 @@ div#header {
     padding: 0.3rem;
 }
 
-html.inverted div#header {
+html.night div#header {
     border-bottom: 1px solid #bababa;
 }

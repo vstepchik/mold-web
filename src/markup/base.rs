@@ -10,7 +10,7 @@ const THEME_ICON_URL: &str = "/s/day-and-night.svg";
 pub fn template_base(is_night: bool, title: &str, markup: Markup) -> Markup {
     html! {
         (DOCTYPE)
-        html.inverted[is_night] lang="en" {
+        html.night[is_night] lang="en" {
             head {
                 meta charset="utf-8";
                 link rel="shortcut icon" href=(FAVICON_URL) type="image/x-icon";
@@ -30,7 +30,9 @@ fn header() -> Markup {
                 img#logo src=(LOGO_URL);
             }
             img#themeIcon src=(THEME_ICON_URL)
-                onclick="document.cookie = \"night=\" + document.documentElement.classList.toggle(\"inverted\") + \"; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT\"";
+                onclick="document.cookie = \"night=\" + \
+                document.documentElement.classList.toggle(\"night\") + \"; path=/; \
+                expires=Fri, 31 Dec 9999 23:59:59 GMT\"";
         }
     }
 }
