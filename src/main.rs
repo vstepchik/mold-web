@@ -29,8 +29,8 @@ fn article(id: String) -> Option<Markup> {
 
 #[get("/s/<file>")]
 fn static_res(file: String) -> Option<Stream<Cursor<Vec<u8>>>> {
-    let file = format!("data/{}", file);
-    FILES.get(file.as_str()).map(|data| Stream::from(Cursor::new(Vec::from(data.into_owned())))).ok()
+    FILES.get(format!("data/{}", file).as_str()).ok()
+        .map(|data| Stream::from(Cursor::new(Vec::from(data.into_owned()))))
 }
 
 #[catch(404)]
