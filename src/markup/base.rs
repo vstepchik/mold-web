@@ -32,9 +32,8 @@ fn header() -> Markup {
             a href=("/") {
                 img id="logo" src=(LOGO_URL);
             }
-            a href=("/") {
-                img id="themeIcon" src=(THEME_ICON_URL);
-            }
+            img id="themeIcon" src=(THEME_ICON_URL)
+                onclick="document.cookie = \"night=\" + document.documentElement.classList.toggle(\"inverted\") + \"; expires=Fri, 31 Dec 9999 23:59:59 GMT\"";
         }
     }
 }

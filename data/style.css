@@ -168,6 +168,7 @@ img#logo, img#themeIcon {
 
 img#themeIcon {
     float: right;
+    cursor: pointer;
 }
 
 div#header {
