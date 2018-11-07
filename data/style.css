@@ -155,3 +155,12 @@ div#header {
 html.night div#header {
     border-bottom: 1px solid #bababa;
 }
+
+#jumpToTop {
+    position: fixed;
+    left: 0.5rem;
+    bottom: 2rem;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+}

@@ -6,26 +6,30 @@ const FONT_CSS_URL: &str = "https://fonts.googleapis.com/css?family=Open+Sans";
 
 const LOGO_URL: &str = FAVICON_URL;
 const THEME_ICON_URL: &str = "/s/day-and-night.svg";
+const JUMP_TO_TOP_ICON_URL: &str = "/s/top.svg";
 
 pub fn template_base(is_night: bool, title: &str, markup: Markup) -> Markup {
     html! {
         (DOCTYPE)
-        html.night[is_night] lang="en" {
+        html#top.night[is_night] lang="en" {
             head {
                 meta charset="utf-8";
                 link rel="shortcut icon" href=(FAVICON_URL) type="image/x-icon";
-                link rel="stylesheet" href=(CSS_URL);
                 link rel="stylesheet" href=(FONT_CSS_URL);
+                link rel="stylesheet" href=(CSS_URL);
                 title { (title) }
             }
-            body { (header()) (markup) }
+            body {
+                (header())
+                (markup)
+            }
         }
     }
 }
 
 fn header() -> Markup {
     html! {
-        div id="header" {
+        div#header {
             a href=("/") {
                 img#logo src=(LOGO_URL) width="0" height="0";
             }
@@ -33,6 +37,9 @@ fn header() -> Markup {
                 onclick="document.cookie = \"night=\" + \
                 document.documentElement.classList.toggle(\"night\") + \"; path=/; \
                 expires=Fri, 31 Dec 9999 23:59:59 GMT\"";
+        }
+        div#jumpToTop width="0" height="0" {
+            a href="#top" { img src=(JUMP_TO_TOP_ICON_URL); }
         }
     }
 }
