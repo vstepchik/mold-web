@@ -1,4 +1,3 @@
-use crate::markup::base::template_base;
 use maud::{html, Markup};
 use super::Article;
 
@@ -7,8 +6,8 @@ pub struct AboutMoldWeb;
 impl Article for AboutMoldWeb {
     fn title(&self) -> &str { "About this site" }
 
-    fn render(&self, is_night: bool) -> Markup {
-        template_base(is_night, "About mold-web", html! {
+    fn body(&self) -> Markup {
+        html! {
             h1 { "Sample article." }
             p { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent malesuada odio velit, vel mattis mauris vulputate sed. Duis viverra mauris sed commodo bibendum. Aliquam tincidunt viverra vestibulum. Praesent non suscipit dolor, eu posuere eros. Nullam convallis, ex id malesuada volutpat, quam lectus faucibus purus, nec efficitur dolor tortor quis nulla. Nullam tempus, dolor et imperdiet semper, massa orci pretium nulla, eget euismod massa mauris non tortor. Nulla leo ante, egestas id libero at, condimentum dapibus metus. Sed tempor, ipsum vel tristique scelerisque, justo diam molestie quam, eu interdum est massa ac ligula. Fusce congue iaculis lacinia. Fusce vel risus accumsan nulla porta egestas eu gravida eros. Morbi elementum elit ipsum, fringilla accumsan velit posuere ut. Vestibulum sed finibus massa. Nam consequat malesuada neque, vel pharetra ante rutrum et. Nulla tincidunt placerat lacus non scelerisque. Mauris orci nibh, semper at nisl eget, blandit mollis lorem." }
             p { "Praesent urna lacus, faucibus a venenatis eu, efficitur feugiat mauris. Duis sed ligula eu lorem pretium luctus id hendrerit enim. Vestibulum ultrices pellentesque posuere. Pellentesque ornare, magna eget congue consectetur, libero tellus malesuada felis, vitae rhoncus nisl nulla quis dolor. Maecenas ultrices sollicitudin tempus. Nullam sodales neque libero, id varius urna dapibus nec. Integer id nisl nisi. Etiam dapibus dolor eget enim pulvinar consectetur. Nulla consequat, nisl non elementum bibendum, nisi turpis porta mauris, et commodo libero nulla a nisi. Maecenas sed tellus tellus. Vestibulum commodo tristique nibh a sodales. Aenean eu tellus dapibus, tincidunt erat sit amet, convallis leo." }
@@ -26,6 +25,6 @@ impl Article for AboutMoldWeb {
             p { "Donec tempus dictum sollicitudin. Suspendisse a egestas neque. Cras congue tellus in finibus fermentum. Duis eget euismod ipsum. Suspendisse ante nulla, pellentesque vitae leo vitae, bibendum ornare mi. Vestibulum scelerisque arcu vel metus euismod, vel tempus nisl venenatis. Mauris posuere nunc nec sapien sodales, non ornare enim accumsan." }
             p { "Mauris quis elit nisi. Nullam justo nulla, mollis a volutpat quis, posuere eu enim. Mauris sit amet quam eu libero sollicitudin tempus. Aenean ut lorem semper mi imperdiet pellentesque. Fusce vitae mi facilisis purus aliquet finibus sed at nunc. Aenean dui mi, tempor eu sapien sed, pulvinar feugiat turpis. Aliquam sodales fringilla mauris, a aliquet diam dapibus nec. Nullam mollis ligula dapibus nunc dapibus dapibus. Sed in malesuada libero. Fusce tristique cursus ligula non faucibus. " }
             p { "Bla." }
-        })
+        }
     }
 }

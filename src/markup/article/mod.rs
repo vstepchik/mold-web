@@ -1,3 +1,4 @@
+use crate::markup::base::template_base;
 use maud::Markup;
 use phf;
 
@@ -9,5 +10,8 @@ pub static ARTICLES: phf::Map<&'static str, &'static Article> = phf_map! {
 
 pub trait Article where Self: Sync {
     fn title(&self) -> &str;
-    fn render(&self, is_night: bool) -> Markup;
+    fn body(&self) -> Markup;
+    fn render(&self, is_night: bool) -> Markup {
+        template_base(is_night, self.title(), self.body())
+    }
 }
