@@ -1,3 +1,4 @@
+use crate::markup::article::Date;
 use maud::{html, Markup};
 use super::Article;
 
@@ -5,6 +6,14 @@ pub struct AboutMoldWeb;
 
 impl Article for AboutMoldWeb {
     fn title(&self) -> &str { "About this site" }
+
+    fn date(&self) -> Date { Date::new(2018, 11, 8) }
+
+    fn summary(&self) -> Markup {
+        html! {
+            "The reason I started this project and some details about its implementation."
+        }
+    }
 
     fn body(&self) -> Markup {
         html! {

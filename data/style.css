@@ -167,3 +167,8 @@ html.night div#header {
     height: 2rem;
     cursor: pointer;
 }
+
+.article .date {
+    font-size: 0.8em;
+    margin: 0 4px;
+}
