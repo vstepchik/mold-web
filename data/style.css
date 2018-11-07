@@ -160,6 +160,9 @@ html.night div#header {
     position: fixed;
     left: 0.5rem;
     bottom: 2rem;
+}
+
+#jumpToTop img {
     width: 2rem;
     height: 2rem;
     cursor: pointer;

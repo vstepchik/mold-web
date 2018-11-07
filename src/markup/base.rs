@@ -38,8 +38,8 @@ fn header() -> Markup {
                 document.documentElement.classList.toggle(\"night\") + \"; path=/; \
                 expires=Fri, 31 Dec 9999 23:59:59 GMT\"";
         }
-        div#jumpToTop width="0" height="0" {
-            a href="#top" { img src=(JUMP_TO_TOP_ICON_URL); }
+        div#jumpToTop {
+            a href="#top" { img width="0" height="0" src=(JUMP_TO_TOP_ICON_URL); }
         }
     }
 }
