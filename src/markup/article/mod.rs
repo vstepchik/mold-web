@@ -8,5 +8,6 @@ pub static ARTICLES: phf::Map<&'static str, &'static Article> = phf_map! {
 };
 
 pub trait Article where Self: Sync {
+    fn title(&self) -> &str;
     fn render(&self, is_night: bool) -> Markup;
 }
