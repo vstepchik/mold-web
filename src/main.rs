@@ -6,11 +6,12 @@ extern crate maud;
 extern crate phf;
 extern crate rocket;
 
-use crate::markup::ARTICLES;
-use crate::static_res::StaticResource;
 use maud::Markup;
 use rocket::http::Cookies;
 use rocket::Request;
+
+use crate::markup::ARTICLES;
+use crate::static_res::StaticResource;
 
 mod markup;
 mod cookies;
@@ -34,6 +35,16 @@ fn static_res(file: String) -> Option<StaticResource> {
     StaticResource::new(file.as_str())
 }
 
+#[get("/robots.txt")]
+fn robots() -> &'static str {
+    "User-agent: *\nDisallow:\nAllow: /\n"
+}
+
+#[get("/favicon.ico")]
+fn favicon() -> Option<StaticResource> {
+    StaticResource::new("favicon.ico")
+}
+
 #[catch(404)]
 fn not_found(req: &Request) -> Markup {
     markup::e404(req)
@@ -41,7 +52,7 @@ fn not_found(req: &Request) -> Markup {
 
 fn rocket() -> rocket::Rocket {
     rocket::ignite()
-        .mount("/", routes![static_res, index, article])
+        .mount("/", routes![static_res, robots, favicon, index, article])
         .catch(catchers![not_found])
 }
 

@@ -1,10 +1,10 @@
 use maud::{DOCTYPE, html, Markup};
 
-const FAVICON_URL: &str = "/s/favicon.svg";
+const FAVICON_URL: &str = "/favicon.ico";
 const CSS_URL: &str = "/s/style.css";
 const FONT_CSS_URL: &str = "https://fonts.googleapis.com/css?family=Open+Sans";
 
-const LOGO_URL: &str = FAVICON_URL;
+const LOGO_URL: &str = "/s/logo.svg";
 const THEME_ICON_URL: &str = "/s/day-and-night.svg";
 const JUMP_TO_TOP_ICON_URL: &str = "/s/top.svg";
 
