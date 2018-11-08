@@ -1,7 +1,9 @@
-use crate::markup::base::template_base;
-use maud::Markup;
-use phf;
 use std::fmt;
+
+use maud::{html, Markup};
+use phf;
+
+use crate::markup::base::template_base;
 
 mod about_mold_web;
 
@@ -14,8 +16,13 @@ pub trait Article where Self: Sync {
     fn date(&self) -> Date;
     fn summary(&self) -> Markup;
     fn body(&self) -> Markup;
+
     fn render(&self, is_night: bool) -> Markup {
-        template_base(is_night, self.title(), self.body())
+        template_base(is_night, self.title(), html! {
+            span.date { (self.date()) }
+            h1 { (self.title()) }
+            (self.body())
+        })
     }
 }
 

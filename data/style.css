@@ -37,6 +37,10 @@ html.night a:visited {
     color: #ac5a82;
 }
 
+p {
+    text-indent: 1.5em;
+}
+
 a {
     color: #07a;
 }
@@ -168,7 +172,25 @@ html.night div#header {
     cursor: pointer;
 }
 
+.article {
+    margin: 0 0 2em;
+}
+
+.article h3 {
+    text-indent: 1.5em;
+}
+
+.date {
+    float: right;
+    margin: 0.4em 1em;
+    font-style: italic;
+    color: #788;
+}
+
+html.night .date {
+    color: #566;
+}
+
 .article .date {
     font-size: 0.8em;
-    margin: 0 4px;
 }

@@ -1,5 +1,7 @@
-use crate::markup::article::Date;
 use maud::{html, Markup};
+
+use crate::markup::article::Date;
+
 use super::Article;
 
 pub struct AboutMoldWeb;
@@ -17,7 +19,6 @@ impl Article for AboutMoldWeb {
 
     fn body(&self) -> Markup {
         html! {
-            h1 { "Sample article." }
             p { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent malesuada odio velit, vel mattis mauris vulputate sed. Duis viverra mauris sed commodo bibendum. Aliquam tincidunt viverra vestibulum. Praesent non suscipit dolor, eu posuere eros. Nullam convallis, ex id malesuada volutpat, quam lectus faucibus purus, nec efficitur dolor tortor quis nulla. Nullam tempus, dolor et imperdiet semper, massa orci pretium nulla, eget euismod massa mauris non tortor. Nulla leo ante, egestas id libero at, condimentum dapibus metus. Sed tempor, ipsum vel tristique scelerisque, justo diam molestie quam, eu interdum est massa ac ligula. Fusce congue iaculis lacinia. Fusce vel risus accumsan nulla porta egestas eu gravida eros. Morbi elementum elit ipsum, fringilla accumsan velit posuere ut. Vestibulum sed finibus massa. Nam consequat malesuada neque, vel pharetra ante rutrum et. Nulla tincidunt placerat lacus non scelerisque. Mauris orci nibh, semper at nisl eget, blandit mollis lorem." }
             p { "Praesent urna lacus, faucibus a venenatis eu, efficitur feugiat mauris. Duis sed ligula eu lorem pretium luctus id hendrerit enim. Vestibulum ultrices pellentesque posuere. Pellentesque ornare, magna eget congue consectetur, libero tellus malesuada felis, vitae rhoncus nisl nulla quis dolor. Maecenas ultrices sollicitudin tempus. Nullam sodales neque libero, id varius urna dapibus nec. Integer id nisl nisi. Etiam dapibus dolor eget enim pulvinar consectetur. Nulla consequat, nisl non elementum bibendum, nisi turpis porta mauris, et commodo libero nulla a nisi. Maecenas sed tellus tellus. Vestibulum commodo tristique nibh a sodales. Aenean eu tellus dapibus, tincidunt erat sit amet, convallis leo." }
             p { "Ut ac iaculis augue. Quisque vehicula, erat eget consequat ultrices, mauris ex pellentesque purus, quis vestibulum magna enim et urna. Sed venenatis arcu ut purus scelerisque sagittis. Suspendisse at lorem at velit fermentum commodo. Nullam posuere sodales lacinia. In luctus quam et leo finibus varius. Suspendisse interdum cursus ex, eget pulvinar dui volutpat quis. Nulla aliquet dignissim augue, eget semper lorem fermentum nec. In at ante sit amet magna feugiat ultrices. Pellentesque vitae massa sed lectus ultricies fringilla eget vel ante. Phasellus consectetur sagittis dignissim." }

@@ -1,6 +1,7 @@
+use maud::{html, Markup};
+
 use crate::markup::ARTICLES;
 use crate::markup::base::template_base;
-use maud::{html, Markup};
 
 const ARTICLE_URL_PREFIX: &'static str = "/a";
 
@@ -11,8 +12,8 @@ pub fn index(is_night: bool) -> Markup {
             div.article {
                 h3 { a href={ (ARTICLE_URL_PREFIX) "/" (id) } { (article.title()) } }
                 p {
-                    span.date { (article.date()) }
                     (article.summary())
+                    span.date { (article.date()) }
                 }
             }
         }
