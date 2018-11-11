@@ -8,20 +8,22 @@ use crate::markup::base::template_base;
 mod about_mold_web;
 
 pub static ARTICLES: phf::Map<&'static str, &'static Article> = phf_map! {
-    "about-mold-web" => &about_mold_web::AboutMoldWeb,
+    "about-mold-web" => &about_mold_web::ABOUT_MOLD_WEB,
 };
 
-pub trait Article where Self: Sync {
-    fn title(&self) -> &str;
-    fn date(&self) -> Date;
-    fn summary(&self) -> Markup;
-    fn body(&self) -> Markup;
+pub struct Article<'a> {
+    pub title: &'a str,
+    pub date: Date,
+    pub summary:  &'static (Fn() -> Markup + Sync),
+    pub body: &'static (Fn() -> Markup + Sync),
+}
 
-    fn render(&self, is_night: bool) -> Markup {
-        template_base(is_night, self.title(), html! {
-            span.date { (self.date()) }
-            h1 { (self.title()) }
-            (self.body())
+impl <'a> Article<'a> {
+    pub fn render(&self, is_night: bool) -> Markup {
+        template_base(is_night, self.title, html! {
+            span.date { (self.date) }
+            h1 { (self.title) }
+            ((self.body)())
         })
     }
 }
@@ -30,15 +32,6 @@ pub struct Date {
     pub year: u16,
     pub month: u8,
     pub day: u8,
-}
-
-impl Date {
-    pub fn new(year: u16, month: u8, day: u8) -> Self {
-        assert!(year > 2000 && year <= 2100);
-        assert!(month > 0 && month <= 12);
-        assert!(day > 0 && day <= 31);
-        Date { year, month, day }
-    }
 }
 
 impl fmt::Display for Date {

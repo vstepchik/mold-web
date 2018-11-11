@@ -9,10 +9,10 @@ pub fn index(is_night: bool) -> Markup {
     template_base(is_night, "Mildew", html! {
         @for (id, article) in ARTICLES.entries().rev() {
             div.article {
-                h3 { a href={ (ARTICLE_URL_PREFIX) "/" (id) } { (article.title()) } }
+                h3 { a href={ (ARTICLE_URL_PREFIX) "/" (id) } { (article.title) } }
                 p {
-                    (article.summary())
-                    span.date { (article.date()) }
+                    ((article.summary)())
+                    span.date { (article.date) }
                 }
             }
         }
