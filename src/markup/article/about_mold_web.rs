@@ -1,6 +1,7 @@
 use maud::{html, Markup};
 
 use crate::markup::article::{Article, Date};
+use crate::markup::icons::{icon, KOTLIN, PYTHON, RUST};
 
 pub const ABOUT_MOLD_WEB: Article = Article {
     title: "About this site",
@@ -17,21 +18,37 @@ fn summary() -> Markup {
 
 fn body() -> Markup {
     html! {
-            p { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent malesuada odio velit, vel mattis mauris vulputate sed. Duis viverra mauris sed commodo bibendum. Aliquam tincidunt viverra vestibulum. Praesent non suscipit dolor, eu posuere eros. Nullam convallis, ex id malesuada volutpat, quam lectus faucibus purus, nec efficitur dolor tortor quis nulla. Nullam tempus, dolor et imperdiet semper, massa orci pretium nulla, eget euismod massa mauris non tortor. Nulla leo ante, egestas id libero at, condimentum dapibus metus. Sed tempor, ipsum vel tristique scelerisque, justo diam molestie quam, eu interdum est massa ac ligula. Fusce congue iaculis lacinia. Fusce vel risus accumsan nulla porta egestas eu gravida eros. Morbi elementum elit ipsum, fringilla accumsan velit posuere ut. Vestibulum sed finibus massa. Nam consequat malesuada neque, vel pharetra ante rutrum et. Nulla tincidunt placerat lacus non scelerisque. Mauris orci nibh, semper at nisl eget, blandit mollis lorem." }
-            p { "Praesent urna lacus, faucibus a venenatis eu, efficitur feugiat mauris. Duis sed ligula eu lorem pretium luctus id hendrerit enim. Vestibulum ultrices pellentesque posuere. Pellentesque ornare, magna eget congue consectetur, libero tellus malesuada felis, vitae rhoncus nisl nulla quis dolor. Maecenas ultrices sollicitudin tempus. Nullam sodales neque libero, id varius urna dapibus nec. Integer id nisl nisi. Etiam dapibus dolor eget enim pulvinar consectetur. Nulla consequat, nisl non elementum bibendum, nisi turpis porta mauris, et commodo libero nulla a nisi. Maecenas sed tellus tellus. Vestibulum commodo tristique nibh a sodales. Aenean eu tellus dapibus, tincidunt erat sit amet, convallis leo." }
-            p { "Ut ac iaculis augue. Quisque vehicula, erat eget consequat ultrices, mauris ex pellentesque purus, quis vestibulum magna enim et urna. Sed venenatis arcu ut purus scelerisque sagittis. Suspendisse at lorem at velit fermentum commodo. Nullam posuere sodales lacinia. In luctus quam et leo finibus varius. Suspendisse interdum cursus ex, eget pulvinar dui volutpat quis. Nulla aliquet dignissim augue, eget semper lorem fermentum nec. In at ante sit amet magna feugiat ultrices. Pellentesque vitae massa sed lectus ultricies fringilla eget vel ante. Phasellus consectetur sagittis dignissim." }
-            p { "Suspendisse at ex id arcu fringilla luctus. Cras convallis, odio vel semper posuere, libero arcu aliquet sem, eu bibendum eros nibh vel ipsum. In quis massa id mauris scelerisque accumsan. Curabitur ut massa nisi. Praesent vestibulum eget nisi ut porta. Praesent in mi leo. Cras in lectus dui. Mauris nulla odio, hendrerit vitae mauris id, dapibus eleifend dui. Duis sit amet velit congue, porttitor sem vel, convallis dolor. Proin ultrices rutrum mi, ut pharetra magna posuere vitae. Vestibulum viverra in eros eu placerat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer laoreet nunc eu neque maximus, sit amet faucibus diam semper. Sed pulvinar rutrum interdum. Mauris luctus vitae libero sit amet laoreet." }
-            p { "Ut sit amet turpis eros. Maecenas dignissim suscipit urna eget tincidunt. Maecenas elementum, augue sit amet mattis fermentum, mi mi gravida lacus, sed dapibus odio nunc vitae arcu. In egestas rhoncus metus. Aenean urna lacus, pulvinar sed consectetur vitae, congue eget turpis. Maecenas vulputate lacus nec tortor consequat tempor. Etiam sit amet gravida erat." }
-            p { "Suspendisse luctus arcu non quam congue imperdiet. Mauris pellentesque, nunc in posuere vehicula, libero turpis facilisis sem, in sollicitudin ex nisl ac ex. Donec est elit, fringilla vel commodo non, venenatis non ipsum. Sed magna nunc, ullamcorper laoreet semper ut, viverra id urna. Phasellus blandit scelerisque rhoncus. Donec commodo est vitae mi pharetra feugiat. Cras dignissim pretium enim, ut placerat eros mattis sed. Mauris ultricies nunc sit amet justo vulputate, nec condimentum orci convallis. Ut quis libero id eros blandit hendrerit. Quisque a dignissim massa, ac tempor eros. Maecenas semper augue accumsan tempus rhoncus. Cras vel condimentum lectus. Aliquam nec dignissim tortor. In nec lobortis mauris, rhoncus varius nulla. Morbi hendrerit dapibus ligula, faucibus mollis lorem ullamcorper ac. Vivamus turpis velit, sodales at ultrices ut, dictum non quam." }
-            p { "Quisque molestie metus ipsum, id consectetur massa ornare auctor. Mauris volutpat nisi eget enim fringilla dapibus. Donec eu nibh tincidunt, pretium sem quis, sagittis ex. Vivamus pharetra finibus velit, eu malesuada neque feugiat sit amet. Nam faucibus volutpat libero, vel fringilla ante iaculis mollis. Mauris aliquam tellus est, a consequat neque molestie eget. Suspendisse eleifend quis magna in aliquet. Aliquam elementum nisl sed leo condimentum sodales. Etiam euismod augue ut ornare imperdiet. Aenean a sem et sem volutpat interdum. Nulla eu neque eu nibh tincidunt sagittis vel a mauris." }
-            p { "Nulla pretium elementum turpis, at mollis tortor bibendum eu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla id ornare velit. Suspendisse finibus orci ac urna scelerisque, in imperdiet odio molestie. Vivamus eleifend ullamcorper risus vel posuere. In hac habitasse platea dictumst. Aliquam feugiat vel ex vitae mollis. Maecenas sagittis tristique diam ac lacinia. Vestibulum est nibh, viverra et sem at, vehicula molestie arcu. Mauris ullamcorper, est vel elementum consectetur, ligula purus hendrerit erat, vel ullamcorper diam nisl eu eros. Nullam dictum elementum justo, sit amet dictum sem iaculis in. Quisque porta elit ac pellentesque auctor." }
-            p { "Nullam elementum lobortis ligula et molestie. Integer non cursus diam. Donec ornare suscipit diam, ac viverra nisl. Curabitur auctor est id posuere maximus. Suspendisse sapien dui, rutrum non efficitur vitae, euismod quis nisl. Praesent id cursus tortor, sed euismod orci. Curabitur vel leo at felis ullamcorper gravida. Pellentesque sit amet dignissim velit. Morbi sed pharetra magna, eu commodo tellus." }
-            p { "Etiam elit lacus, aliquam sed aliquet posuere, interdum nec lorem. Suspendisse imperdiet libero id ipsum rutrum, at hendrerit ex maximus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus pulvinar consequat magna, ut posuere nibh interdum ut. Nunc gravida ut tortor quis eleifend. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris iaculis odio eget rutrum congue. Praesent et augue id mauris ornare venenatis. Cras tempus interdum leo id tempus. Fusce id rutrum ipsum." }
-            p { "Vestibulum sit amet condimentum nisi, eu suscipit lorem. Donec vitae congue libero, et pretium nibh. Donec bibendum aliquet dui eu dictum. Maecenas vitae vehicula est, vel venenatis justo. Vestibulum pharetra tellus ex. Praesent ac porta nibh. Aliquam tempus justo nec augue accumsan, eget tempor nibh faucibus. Ut consequat elit ac enim hendrerit rhoncus. Donec risus urna, faucibus et urna sit amet, ornare facilisis lorem. In in sagittis tortor. Donec in blandit urna. In vel porttitor magna. Fusce quis dui ac urna lobortis vehicula ornare nec sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur tempus, quam sed porta vestibulum, sapien lectus interdum ligula, id suscipit orci tortor ut risus. Ut sit amet diam lacus." }
-            p { "Cras interdum metus non arcu tincidunt tempor. Sed nec lobortis arcu. Aenean at pulvinar risus, vel pharetra quam. Aenean maximus molestie arcu, at eleifend nibh. Vivamus eu nulla quis dui sollicitudin euismod at et purus. Nulla id augue eu lacus tincidunt tincidunt. Nunc aliquet in mi non efficitur." }
-            p { "Integer mollis leo ut turpis efficitur, nec volutpat magna auctor. Morbi vitae urna risus. Pellentesque ut nunc arcu. Aliquam porttitor, lorem vitae scelerisque facilisis, elit ipsum tincidunt eros, sit amet commodo tellus ipsum eu elit. Cras ut arcu auctor, molestie enim quis, accumsan elit. Praesent nec urna fermentum, efficitur sapien vitae, eleifend odio. Vestibulum vel neque feugiat, suscipit purus vel, scelerisque lorem. Maecenas finibus nisi eget nisi tempus elementum. Duis laoreet dolor in maximus posuere. Donec eget porttitor ligula. Ut dictum sodales libero vitae tincidunt. Vivamus congue felis hendrerit purus tristique, sed auctor lectus maximus. Vestibulum faucibus rutrum ligula. Fusce et velit nisl." }
-            p { "Donec tempus dictum sollicitudin. Suspendisse a egestas neque. Cras congue tellus in finibus fermentum. Duis eget euismod ipsum. Suspendisse ante nulla, pellentesque vitae leo vitae, bibendum ornare mi. Vestibulum scelerisque arcu vel metus euismod, vel tempus nisl venenatis. Mauris posuere nunc nec sapien sodales, non ornare enim accumsan." }
-            p { "Mauris quis elit nisi. Nullam justo nulla, mollis a volutpat quis, posuere eu enim. Mauris sit amet quam eu libero sollicitudin tempus. Aenean ut lorem semper mi imperdiet pellentesque. Fusce vitae mi facilisis purus aliquet finibus sed at nunc. Aenean dui mi, tempor eu sapien sed, pulvinar feugiat turpis. Aliquam sodales fringilla mauris, a aliquet diam dapibus nec. Nullam mollis ligula dapibus nunc dapibus dapibus. Sed in malesuada libero. Fusce tristique cursus ligula non faucibus. " }
-            p { "Bla." }
+            p {
+                "So, the idea to start the project came into my head while I was on a vacation "
+                "in Amsterdam. What a wonderful city! That magical and unreal combination of "
+                "beautiful old architecture, high-tech and nature! \u{1f498}"
+            }
+            p {
+                "I've long been interested in procedural content generation, especially map "
+                "generation and simulation, mostly as theorist. But this time I was playing with "
+                "the actual implementation of the map generation with python " (icon(PYTHON))
+                " bla " (icon(KOTLIN)) (icon(PYTHON)) (icon(RUST))
+            }
+            p {
+                "Blogging."
+            }
+            p {
+                "Exotics."
+            }
+            p {
+                "Rust. Rocket."
+            }
+            p {
+                "Repository."
+            }
+            p {
+                "Implementation. Bundled everything."
+            }
+            p {
+                "Size optimization."
+            }
+            p {
+                "Results."
+            }
         }
 }

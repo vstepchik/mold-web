@@ -194,3 +194,9 @@ html.night .date {
 .article .date {
     font-size: 0.8em;
 }
+
+.icon {
+    width: .8em;
+    height: .8em;
+    margin: .075em;
+}

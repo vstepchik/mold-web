@@ -6,3 +6,4 @@ mod base;
 mod e404;
 mod index;
 mod article;
+mod icons;
