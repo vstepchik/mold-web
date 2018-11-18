@@ -6,25 +6,18 @@ extern crate includedir;
 extern crate maud;
 extern crate phf;
 
-use actix_web::App;
-use actix_web::http;
+use actix_web::{App, http, HttpRequest, HttpResponse, Result, server};
 use actix_web::http::header::ContentType;
-use actix_web::HttpRequest;
-use actix_web::HttpResponse;
-use actix_web::middleware::ErrorHandlers;
-//use crate::static_res::StaticResource;
-use actix_web::middleware::Logger;
-use actix_web::middleware::Response;
-use actix_web::Result;
-use actix_web::server;
+use actix_web::middleware::{ErrorHandlers, Logger, Response};
 use bytes::Bytes;
 use maud::Markup;
 
 use crate::markup::ARTICLES;
+use crate::static_res::StaticResource;
 
 mod markup;
 mod cookies;
-//mod static_res;
+mod static_res;
 
 
 fn index(req: &HttpRequest) -> Markup {
@@ -38,19 +31,18 @@ fn article(req: &HttpRequest) -> Option<Markup> {
     ARTICLES.get(id.as_str()).map(|a| a.render(is_night))
 }
 
-//#[get("/s/<file>")]
-//fn static_res(file: String) -> Option<StaticResource> {
-//    StaticResource::new(file.as_str())
-//}
+fn static_res(req: &HttpRequest) -> Option<StaticResource> {
+    let file: String = req.match_info().query("file").unwrap_or(String::new());
+    StaticResource::new(file.as_str())
+}
 
 fn robots(_req: &HttpRequest) -> &'static str {
     "User-agent: *\nDisallow:\nAllow: /\n"
 }
 
-//#[get("/favicon.ico")]
-//fn favicon() -> Option<StaticResource> {
-//    StaticResource::new("favicon.ico")
-//}
+fn favicon(_req: &HttpRequest) -> Option<StaticResource> {
+    StaticResource::new("favicon.ico")
+}
 
 fn not_found(req: &HttpRequest, resp: HttpResponse) -> Result<Response> {
     let body = Bytes::from(markup::e404(req).into_string());
@@ -64,9 +56,9 @@ fn create_app() -> App {
         .middleware(Logger::default())
         .middleware(ErrorHandlers::new().handler(http::StatusCode::NOT_FOUND, not_found))
         .resource("/", |r| r.f(index))
-//        .resource("/s/{file}", |r| r.f(static_res))
+        .resource("/s/{file}", |r| r.f(static_res))
         .resource("/robots.txt", |r| r.f(robots))
-//        .resource("/favicon.ico", |r| r.f(favicon))
+        .resource("/favicon.ico", |r| r.f(favicon))
         .resource("/a/{id}", |r| r.f(article))
 }
 
