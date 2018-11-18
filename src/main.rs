@@ -4,6 +4,7 @@
 extern crate bytes;
 extern crate includedir;
 extern crate maud;
+extern crate mime_guess;
 extern crate phf;
 
 use actix_web::{App, http, HttpRequest, HttpResponse, Result, server};
