@@ -1,6 +1,4 @@
-use rocket::http::ContentType;
-use rocket::request::Request;
-use rocket::response::{self, Responder, Response};
+use actix_web::{App, Error, http, HttpRequest, HttpResponse, Responder, server};
 use std::ffi::OsStr;
 use std::io::Cursor;
 use std::path::Path;
@@ -28,12 +26,19 @@ impl StaticResource {
     }
 }
 
-impl<'r> Responder<'r> for StaticResource {
-    fn respond_to(self, _: &Request) -> response::Result<'r> {
+impl Responder for StaticResource {
+    type Item = HttpResponse;
+    type Error = Error;
+
+    fn respond_to<S>(self, _: &HttpRequest<S>) -> Result<HttpResponse, Error> {
         Response::build()
             .sized_body(Cursor::new(self.data))
             .header(self.content_type)
             .raw_header("Cache-Control", "public, max-age=604800")
-            .ok()
+            .ok();
+
+        Ok(HttpResponse::Ok()
+            .content_type("application/json")
+            .body(self.data))
     }
 }
