@@ -1,8 +1,6 @@
-use std::ffi::OsStr;
-use std::io::Cursor;
 use std::path::Path;
 
-use actix_web::{App, Error, http, HttpRequest, HttpResponse, Responder, server};
+use actix_web::{Error, HttpRequest, HttpResponse, Responder};
 use mime_guess::guess_mime_type;
 use mime_guess::Mime;
 
@@ -30,13 +28,9 @@ impl Responder for StaticResource {
     type Error = Error;
 
     fn respond_to<S>(self, _: &HttpRequest<S>) -> Result<HttpResponse, Error> {
-//        Response::build()
-//            .sized_body(Cursor::new(self.data))
-//            .header(self.content_type)
-//            .raw_header("Cache-Control", "public, max-age=604800")
-//            .ok();
         Ok(HttpResponse::Ok()
             .content_type(self.mime.as_ref())
+            .header("Cache-Control", "public, max-age=604800")
             .body(self.data))
     }
 }
