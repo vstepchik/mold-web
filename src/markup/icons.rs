@@ -12,7 +12,7 @@ pub const RUST: Icon = Icon { href: "rust.svg", alt: "Rust", link: "https://www.
 
 pub fn icon(ico: Icon) -> Markup {
     html! {
-        a href=(ico.link) {
+        a href=(ico.link) target="_blank" {
             img.icon src={ "/s/" (ico.href) } alt=(ico.alt);
         }
     }
