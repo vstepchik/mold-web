@@ -68,7 +68,7 @@ fn main() {
     std::env::set_var("RUST_LOG", "actix_web=info");
     env_logger::init();
     server::new(|| create_app())
-        .bind("127.0.0.1:8000")
+        .bind("0.0.0.0:8000")
         .expect("Unable to bind socket")
         .keep_alive(10)
         .run();
