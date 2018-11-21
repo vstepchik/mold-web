@@ -1,10 +1,11 @@
-use rocket::http::Cookies;
 use std::str::FromStr;
 
-pub fn is_night_theme(cookies: Cookies) -> bool {
+use actix_web::HttpRequest;
+
+pub fn is_night_theme(req: &HttpRequest) -> bool {
     const DEFAULT: bool = false;
 
-    cookies.get("night")
+    req.cookie("night")
         .map(|cookie| bool::from_str(cookie.value()).unwrap_or(DEFAULT))
         .unwrap_or(DEFAULT)
 }

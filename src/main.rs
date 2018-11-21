@@ -1,14 +1,18 @@
 #![feature(plugin, proc_macro_hygiene)]
-#![plugin(rocket_codegen, phf_macros)]
+#![plugin(phf_macros)]
 
+extern crate bytes;
+extern crate env_logger;
 extern crate includedir;
 extern crate maud;
+extern crate mime_guess;
 extern crate phf;
-extern crate rocket;
 
+use actix_web::{App, http, HttpRequest, HttpResponse, Result, server};
+use actix_web::http::header::ContentType;
+use actix_web::middleware::{ErrorHandlers, Logger, Response};
+use bytes::Bytes;
 use maud::Markup;
-use rocket::http::Cookies;
-use rocket::Request;
 
 use crate::markup::ARTICLES;
 use crate::static_res::StaticResource;
@@ -18,44 +22,54 @@ mod cookies;
 mod static_res;
 
 
-#[get("/")]
-fn index(cookies: Cookies) -> Markup {
-    let is_night = cookies::is_night_theme(cookies);
+fn index(req: &HttpRequest) -> Markup {
+    let is_night = cookies::is_night_theme(req);
     markup::index(is_night)
 }
 
-#[get("/a/<id>")]
-fn article(id: String, cookies: Cookies) -> Option<Markup> {
-    let is_night = cookies::is_night_theme(cookies);
+fn article(req: &HttpRequest) -> Option<Markup> {
+    let id: String = req.match_info().query("id").unwrap_or(String::new());
+    let is_night = cookies::is_night_theme(req);
     ARTICLES.get(id.as_str()).map(|a| a.render(is_night))
 }
 
-#[get("/s/<file>")]
-fn static_res(file: String) -> Option<StaticResource> {
+fn static_res(req: &HttpRequest) -> Option<StaticResource> {
+    let file: String = req.match_info().query("file").unwrap_or(String::new());
     StaticResource::new(file.as_str())
 }
 
-#[get("/robots.txt")]
-fn robots() -> &'static str {
+fn robots(_req: &HttpRequest) -> &'static str {
     "User-agent: *\nDisallow:\nAllow: /\n"
 }
 
-#[get("/favicon.ico")]
-fn favicon() -> Option<StaticResource> {
+fn favicon(_req: &HttpRequest) -> Option<StaticResource> {
     StaticResource::new("favicon.ico")
 }
 
-#[catch(404)]
-fn not_found(req: &Request) -> Markup {
-    markup::e404(req)
+fn not_found(req: &HttpRequest, resp: HttpResponse) -> Result<Response> {
+    let body = Bytes::from(markup::e404(req).into_string());
+    let mut builder = resp.into_builder();
+    builder.header(http::header::CONTENT_TYPE, ContentType::html());
+    Ok(Response::Done(builder.body(body)))
 }
 
-fn rocket() -> rocket::Rocket {
-    rocket::ignite()
-        .mount("/", routes![static_res, robots, favicon, index, article])
-        .catch(catchers![not_found])
+fn create_app() -> App {
+    App::new()
+        .middleware(Logger::default())
+        .middleware(ErrorHandlers::new().handler(http::StatusCode::NOT_FOUND, not_found))
+        .resource("/", |r| r.f(index))
+        .resource("/s/{file}", |r| r.f(static_res))
+        .resource("/robots.txt", |r| r.f(robots))
+        .resource("/favicon.ico", |r| r.f(favicon))
+        .resource("/a/{id}", |r| r.f(article))
 }
 
 fn main() {
-    rocket().launch();
+    std::env::set_var("RUST_LOG", "actix_web=info");
+    env_logger::init();
+    server::new(|| create_app())
+        .bind("0.0.0.0:8000")
+        .expect("Unable to bind socket")
+        .keep_alive(10)
+        .run();
 }

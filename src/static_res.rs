@@ -1,39 +1,36 @@
-use rocket::http::ContentType;
-use rocket::request::Request;
-use rocket::response::{self, Responder, Response};
-use std::ffi::OsStr;
-use std::io::Cursor;
 use std::path::Path;
+
+use actix_web::{Error, HttpRequest, HttpResponse, Responder};
+use mime_guess::guess_mime_type;
+use mime_guess::Mime;
 
 pub struct StaticResource {
     data: Vec<u8>,
-    content_type: ContentType,
+    mime: Mime,
 }
 
 include!(concat!(env!("OUT_DIR"), "/data.rs"));
 
 impl StaticResource {
     pub fn new(path: &str) -> Option<Self> {
-        let content_type = Path::new(path)
-            .extension()
-            .and_then(OsStr::to_str)
-            .and_then(|ext| ContentType::from_extension(ext))
-            .unwrap_or(ContentType::Binary);
+        let mime = guess_mime_type(Path::new(path));
 
         FILES.get(format!("data/{}", path).as_str()).ok()
             .map(|data| StaticResource {
                 data: Vec::from(data),
-                content_type,
+                mime,
             })
     }
 }
 
-impl<'r> Responder<'r> for StaticResource {
-    fn respond_to(self, _: &Request) -> response::Result<'r> {
-        Response::build()
-            .sized_body(Cursor::new(self.data))
-            .header(self.content_type)
-            .raw_header("Cache-Control", "public, max-age=604800")
-            .ok()
+impl Responder for StaticResource {
+    type Item = HttpResponse;
+    type Error = Error;
+
+    fn respond_to<S>(self, _: &HttpRequest<S>) -> Result<HttpResponse, Error> {
+        Ok(HttpResponse::Ok()
+            .content_type(self.mime.as_ref())
+            .header("Cache-Control", "public, max-age=604800")
+            .body(self.data))
     }
 }
