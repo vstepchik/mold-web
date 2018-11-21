@@ -1,4 +1,4 @@
-FROM rust:latest as builder
+FROM rust as builder
 
 RUN rustup toolchain install nightly
 
@@ -7,7 +7,7 @@ COPY build.rs Cargo.toml Cargo.lock ./
 COPY data ./data/
 COPY src ./src/
 
-RUN pwd && ls -lah && cargo +nightly build --release
+RUN cargo +nightly build --release
 
 # ---
 
