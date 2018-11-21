@@ -65,10 +65,16 @@ fn create_app() -> App {
 }
 
 fn main() {
-    std::env::set_var("RUST_LOG", "actix_web=info");
+    const LOG_ENV_VAR: &str = "RUST_LOG";
+    let socket = "0.0.0.0:8000";
+
+    if std::env::var_os(LOG_ENV_VAR).is_none() {
+        std::env::set_var(LOG_ENV_VAR, "info");
+    }
     env_logger::init();
+
     server::new(|| create_app())
-        .bind("0.0.0.0:8000")
+        .bind(socket)
         .expect("Unable to bind socket")
         .keep_alive(10)
         .run();
