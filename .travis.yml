@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+ - docker build -it mold:latest .
+
+branches:
+  only:
+  - master
+  - ci
