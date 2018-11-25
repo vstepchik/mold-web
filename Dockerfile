@@ -8,6 +8,7 @@ COPY data ./data/
 COPY src ./src/
 
 RUN cargo +nightly build --release
+# todo: UPX the binary
 
 # ---
 
