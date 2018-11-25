@@ -127,7 +127,7 @@ code { "night" } "CSS class on the " code { "html" } " element and sets the corr
 a href = "https://llvm.org/docs/LinkTimeOptimization.html" target ="_blank" { "link time optimization" }
 ", as it decreased the file size to 1.4Mb, so I’ve turned it on for release builds. "
 "There’s another tool called " a href="https://upx.github.io" target="_blank" { "UPX" }
-"that compressed the binary to only around 900Kb. But how I was surprised when the debug "
+" that compressed the binary to only around 900Kb. But how I was surprised when the debug "
 "build in actix-web variant took 70Mb! Fortunately, the release build took only 5.8Mb "
 "and UPX-packed variant just 2Mb."
         }
@@ -160,8 +160,7 @@ Running 5m test @ http://192.168.1.5:80
   25305739 requests in 5.00m, 23.90GB read
   Socket errors: connect 0, read 189, write 12017, timeout 0
 Requests/sec:  84333.95
-Transfer/sec:   81.55MB
-"""
+Transfer/sec:   81.55MB"""
          } } }
         p {
 "The hecking 84K req/sec! And 90% of the requests finished in under 50ms! There are only 12K "
