@@ -14,6 +14,7 @@ pub fn template_base(is_night: bool, title: &str, markup: Markup) -> Markup {
         html#top.night[is_night] lang="en" {
             head {
                 meta charset="utf-8";
+                link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin?;
                 link rel="shortcut icon" href=(FAVICON_URL) type="image/x-icon";
                 link rel="stylesheet" href=(FONT_CSS_URL);
                 link rel="stylesheet" href=(CSS_URL);
