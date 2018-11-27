@@ -24,17 +24,17 @@ fn body() -> Markup {
 "old architecture, high-tech and nature! \u{1f498}"
         }
         p {
-"I’ve long been interested in procedural content generation in general, and map "
+"I’ve been long interested in procedural content generation in general, and map "
 "generation in particular, and all kinds of process simulation. I usually acted "
 "as a theorist, but when it came to implement something I took the tool I was "
 "the most proficient with – JVM, and with a high degree of perfectionism I was "
-"designing the system architecture, licking it shine, until my enthusiasm is gone. "
+"designing the system architecture, polish to perfection, until my enthusiasm was gone. "
 "So nothing was coming out and I had to find my way, fight perfectionism, find tools "
 "that make it faster to get results, and thank you " strong { "crew4ok" }
 " for keeping shouting on me “GET SHIT DONE!!!” :D. Now, I’ve stopped upon Python "
 (icon(PYTHON)) " as it suits me because there are so many scientific libraries "
-"in its ecosystem implementing all kinds of algorithms and data structures and "
-"often in C/C++ making them really fast. The only thing that I am missing is strong "
+"in its ecosystem implementing all kinds of algorithms and data structures "
+"(often in C/C++ making them really fast). The only thing that I am missing is strong "
 "typing, but still you can attach it to Python if you want. Python greatly shortens "
 "the time period from the idea to implementation and reserve of enthusiasm is "
 "spent more efficiently."
@@ -42,7 +42,7 @@ fn body() -> Markup {
         p {
 "So, on my way to Amsterdam and back I was reading some articles and blog posts about landscape "
 "and world map generation. As it turned out, not as few people are interested in the subject "
-"as I expected. They were writing about the different approaches and ideas they’ve tried and "
+"as I expected. They were writing about different approaches and ideas they’ve tried and "
 "what they’ve got out of them. But what I’ve noticed is that in the Summary section some of the "
 "authors were saying that one of the most useful ideas in their experiments was blogging. "
 "It forced them getting deeper into the subject, filling the gaps in their knowledge and "
@@ -61,15 +61,15 @@ a href="https://thebestmotherfucking.website/" target="_blank" { "thebestmotherf
 "support to "
 a href="https://www.mozilla.org/firefox/" target="_blank" { "Firefox" } " and "
 a href="https://www.google.com/chrome/" target="_blank" { "Chrome" } " not to support "
-"ancient eldritch mammoth poop like IE."
+"ancient revolting mammoth poop like IE."
         }
         p {
 "My main work tools in the recent time are Kotlin " (icon(KOTLIN)) " and Python " (icon(PYTHON))
 ", and my favorite language, undoubtedly, is Rust " (icon(RUST)) ". Rust is a systems "
 "programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety. "
-"I won’t like using JVM-based languages because I’ve simply get tired of them, and there are not "
-"that many variants of the technology: that’s either bare netty or vertx, or relatively "
-"heavy servers like Tomcat/jetty+Spring MVC. And I wouldn’t sleep well if my blog that "
+"I didn’t like using JVM-based languages because I’ve simply get tired of them, and there are not "
+"that many variants of the technology: that’s either bare netty, or relatively "
+"heavy servers like vertx or Tomcat/jetty+Spring MVC. And I wouldn’t sleep well if my blog that "
 "by design should efficiently use computing resources was written in interpreted language "
 "such as Python " (icon(PYTHON)) ". In this way, I was happy to exclude all options to make "
 "Rust win \u{1f606}. According to the "
@@ -80,35 +80,36 @@ a href="https://www.arewewebyet.org/" target="_blank" { "arewewebyet.org" } " at
 "amount of boilerplate to write. But while I was writing this post I’ve stumbled upon a "
 a href="https://www.techempower.com/benchmarks/#section=data-r17&hw=ph&test=plaintext" target="_blank" { "benchmark" }
 " that showed Rocket sucks at performance. Instead there was a leader in rust called "
-a href="https://crates.io/crates/actix-web" target="_blank" { "actix-web" } "."
+a href="https://crates.io/crates/actix-web" target="_blank" { "actix-web" } " (see actix-raw)."
         }
         p {
-"At first I almost did everything by canon: posts are in database, registration, comments, etc… "
-"But roughly weighing how much effort it will take, plus recent GDPR issues which I didn’t "
-"want do deal with, and I even was lazy to set up and support a database, it was decided to "
+"At first I almost did everything as is customary: posts are in database, registration, comments, etc. "
+"But roughly weighing how much effort it will take, and recent GDPR issues which I didn’t "
+"want do deal with… I even was lazy to set up and support a database. So I decided to "
 "put posts under version control and leave everything that is needed to run the blog here: "
 a href="https://github.com/vstepchik/mold-web" target="_blank" {"github.com/vstepchik/mold-web"} "."
         }
         p {
-"Of course, I've been visited by thoughts that if I have no registration, comments, but only "
+"Of course, I had thoughts that if I have no registration, comments, but only "
 "static blog posts, I don't need any dynamic server. Just take Nginx, a bunch of HTML and CSS "
 "files and go. But no, it’s boring! Besides that, I’d have to implement one of the conceived "
-"features with JavaScript. There is too much entropy in this world to write even more JS. "
+"features with JavaScript: the day/night theme switcher. "
+"There is too much entropy in this world to write even more JS. "
 "I confess, I still had to write one line of JavaScript to make that feature work: switching "
 "the day/night color theme. This line contains single expression that toggles the "
 code { "night" } "CSS class on the " code { "html" } " element and sets the corresponding cookie "
 "so the server would know if it needs to render pages with the night theme when you visit "
 "another page. I like it more than the JS solution: page loads always light, and then when JS is "
-"loaded, it checks the cookie (or even worse: URL) and sets the corresponding class. "
+"loaded, it checks the cookie (or even worse - the URL path) and sets the corresponding class. "
 "It also may cause some irritating blinking on some devices when navigating the website."
         }
         p {
-"As you already know, I’ve chosen " a href="https://actix.rs" target="_blank" { "actix-web" }
+"As i wrote above, I’ve chosen " a href="https://actix.rs" target="_blank" { "actix-web" }
 " as a web server, the pages are stored as templates, and are rendered on the server side, "
 "they contain single JS line of code, and a tiny bit of CSS so your eyes won’t bleed. All the "
 "UI graphics is SVG and " code { "favicon.ico" } " is generated in several sizes out of SVG too. "
 "I’ve chosen " a href="https://crates.io/crates/maud" target="_blank" { "Maud" } " as a "
-"template engine &mdash; I like how it accepts macros as Rust templates and bakes them into "
+"template engine - I like how it accepts macros as Rust templates and bakes them into "
 "static strings at compile time. It all sounds good and well, like it will run fast and "
 "take little space, but I was not satisfied yet and thought that if templates are baked "
 "into binary file, it would be cool to also include all the static resources into it! "
