@@ -9,8 +9,8 @@ extern crate mime_guess;
 extern crate phf;
 
 use actix_web::{App, http, HttpRequest, HttpResponse, Result, server};
-use actix_web::http::header::ContentType;
-use actix_web::middleware::{ErrorHandlers, Logger, Response};
+use actix_web::http::header;
+use actix_web::middleware::{cors::Cors, ErrorHandlers, Logger, Response};
 use bytes::Bytes;
 use maud::Markup;
 
@@ -49,7 +49,7 @@ fn favicon(_req: &HttpRequest) -> Option<StaticResource> {
 fn not_found(req: &HttpRequest, resp: HttpResponse) -> Result<Response> {
     let body = Bytes::from(markup::e404(req).into_string());
     let mut builder = resp.into_builder();
-    builder.header(http::header::CONTENT_TYPE, ContentType::html());
+    builder.header(http::header::CONTENT_TYPE, header::ContentType::html());
     Ok(Response::Done(builder.body(body)))
 }
 
@@ -57,6 +57,15 @@ fn create_app() -> App {
     App::new()
         .middleware(Logger::default())
         .middleware(ErrorHandlers::new().handler(http::StatusCode::NOT_FOUND, not_found))
+        .configure(|app| {
+            Cors::for_app(app)
+//                .allowed_origin("https://mold.world")
+                .allowed_methods(vec!["GET", "POST", "OPTIONS"])
+                .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT])
+                .allowed_header(header::CONTENT_TYPE)
+                .max_age(3600)
+                .register()
+        })
         .resource("/", |r| r.f(index))
         .resource("/s/{file}", |r| r.f(static_res))
         .resource("/robots.txt", |r| r.f(robots))

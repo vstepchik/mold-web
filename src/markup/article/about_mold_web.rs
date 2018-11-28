@@ -67,7 +67,7 @@ a href="https://www.google.com/chrome/" target="_blank" { "Chrome" } " not to su
 "My main work tools in the recent time are Kotlin " (icon(KOTLIN)) " and Python " (icon(PYTHON))
 ", and my favorite language, undoubtedly, is Rust " (icon(RUST)) ". Rust is a systems "
 "programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety. "
-"I didn’t like using JVM-based languages because I’ve simply get tired of them, and there are not "
+"I didn’t like using JVM-based languages because I’ve simply got tired of them, and there are not "
 "that many variants of the technology: that’s either bare netty, or relatively "
 "heavy servers like vertx or Tomcat/jetty+Spring MVC. And I wouldn’t sleep well if my blog that "
 "by design should efficiently use computing resources was written in interpreted language "
@@ -100,11 +100,11 @@ a href="https://github.com/vstepchik/mold-web" target="_blank" {"github.com/vste
 code { "night" } "CSS class on the " code { "html" } " element and sets the corresponding cookie "
 "so the server would know if it needs to render pages with the night theme when you visit "
 "another page. I like it more than the JS solution: page loads always light, and then when JS is "
-"loaded, it checks the cookie (or even worse - the URL path) and sets the corresponding class. "
+"loaded, it checks the cookie and sets the corresponding class. "
 "It also may cause some irritating blinking on some devices when navigating the website."
         }
         p {
-"As i wrote above, I’ve chosen " a href="https://actix.rs" target="_blank" { "actix-web" }
+"As I wrote above, I’ve chosen " a href="https://actix.rs" target="_blank" { "actix-web" }
 " as a web server, the pages are stored as templates, and are rendered on the server side, "
 "they contain single JS line of code, and a tiny bit of CSS so your eyes won’t bleed. All the "
 "UI graphics is SVG and " code { "favicon.ico" } " is generated in several sizes out of SVG too. "
