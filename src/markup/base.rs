@@ -2,7 +2,6 @@ use maud::{DOCTYPE, html, Markup};
 
 const FAVICON_URL: &str = "/favicon.ico";
 const CSS_URL: &str = "/s/style.css";
-const FONT_CSS_URL: &str = "https://fonts.googleapis.com/css?family=Open+Sans";
 
 const LOGO_URL: &str = "/s/logo.svg";
 const THEME_ICON_URL: &str = "/s/day-and-night.svg";
@@ -15,9 +14,7 @@ pub fn template_base(is_night: bool, title: &str, head: Option<Markup>, markup: 
             head {
                 meta charset="utf-8";
                 meta name="viewport" content="width=device-width, initial-scale=1";
-                link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin?;
                 link rel="shortcut icon" href=(FAVICON_URL) type="image/x-icon";
-                link rel="stylesheet" href=(FONT_CSS_URL);
                 link rel="stylesheet" href=(CSS_URL);
                 title { (title) }
                 @if let Some(head) = head {
