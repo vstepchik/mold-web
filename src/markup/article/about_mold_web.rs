@@ -6,13 +6,17 @@ use crate::markup::icons::{icon, KOTLIN, PYTHON, RUST};
 pub const ABOUT_MOLD_WEB: Article = Article {
     title: "About this site",
     date: Date { year: 2018, month: 11, day: 12 },
+    keywords: &[
+        "web", "server", "mold", "mildew", "world", "personal blog", "blog",
+        "vitalatron", "vstepchik", "rust", "actix", "actix-web", "rocket", "maud", "performance",
+    ],
     summary: &summary,
     body: &body,
 };
 
 fn summary() -> Markup {
     html! {
-        "The reason I started this project and some details about its implementation."
+        "The reason I started the mold-web project and some details about its implementation."
     }
 }
 
@@ -53,14 +57,14 @@ fn body() -> Markup {
         p {
 "Just as always I was not looking for easy ways and haven’t registered an account on Blogspot "
 "or somewhere else, but inspired by "
-a href="http://motherfuckingwebsite.com/" target="_blank" { "motherfuckingwebsite.com" } ", "
-a href="http://bettermotherfuckingwebsite.com/" target="_blank" { "bettermotherfuckingwebsite.com" }  " and "
-a href="https://thebestmotherfucking.website/" target="_blank" { "thebestmotherfucking.website" }
+a href="http://motherfuckingwebsite.com/" target="_blank" rel="noopener noreferrer" { "motherfuckingwebsite.com" } ", "
+a href="http://bettermotherfuckingwebsite.com/" target="_blank" rel="noopener noreferrer" { "bettermotherfuckingwebsite.com" }  " and "
+a href="https://thebestmotherfucking.website/" target="_blank" rel="noopener noreferrer" { "thebestmotherfucking.website" }
 " I decided to set up my own server with light and fast back-end and same light and fast "
 "front-end. Herewith I didn’t feel like supporting all browsers altogether, so I’ve limited "
 "support to "
-a href="https://www.mozilla.org/firefox/" target="_blank" { "Firefox" } " and "
-a href="https://www.google.com/chrome/" target="_blank" { "Chrome" } " not to support "
+a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer" { "Firefox" } " and "
+a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer" { "Chrome" } " not to support "
 "ancient revolting mammoth poop like IE."
         }
         p {
@@ -73,21 +77,21 @@ a href="https://www.google.com/chrome/" target="_blank" { "Chrome" } " not to su
 "by design should efficiently use computing resources was written in interpreted language "
 "such as Python " (icon(PYTHON)) ". In this way, I was happy to exclude all options to make "
 "Rust win \u{1f606}. According to the "
-a href="https://www.arewewebyet.org/" target="_blank" { "arewewebyet.org" } " at the "
+a href="https://www.arewewebyet.org/" target="_blank" rel="noopener noreferrer" { "arewewebyet.org" } " at the "
 "moment there are a few web frameworks in Rust’s ecosystem. At first I was "
-"looking at " a href="https://crates.io/crates/rocket" target="_blank" { "Rocket" } " just "
+"looking at " a href="https://crates.io/crates/rocket" target="_blank" rel="noopener noreferrer" { "Rocket" } " just "
 "because I like how routes are specified with directives above functions and negligible "
 "amount of boilerplate to write. But while I was writing this post I’ve stumbled upon a "
-a href="https://www.techempower.com/benchmarks/#section=data-r17&hw=ph&test=plaintext" target="_blank" { "benchmark" }
+a href="https://www.techempower.com/benchmarks/#section=data-r17&hw=ph&test=plaintext" target="_blank" rel="noopener noreferrer" { "benchmark" }
 " that showed Rocket sucks at performance. Instead there was a leader in rust called "
-a href="https://crates.io/crates/actix-web" target="_blank" { "actix-web" } " (see actix-raw)."
+a href="https://crates.io/crates/actix-web" target="_blank" rel="noopener noreferrer" { "actix-web" } " (see actix-raw)."
         }
         p {
 "At first I almost did everything as is customary: posts are in database, registration, comments, etc. "
 "But roughly weighing how much effort it will take, and recent GDPR issues which I didn’t "
 "want do deal with… I even was lazy to set up and support a database. So I decided to "
 "put posts under version control and leave everything that is needed to run the blog here: "
-a href="https://github.com/vstepchik/mold-web" target="_blank" {"github.com/vstepchik/mold-web"} "."
+a href="https://github.com/vstepchik/mold-web" target="_blank" rel="noopener noreferrer" {"github.com/vstepchik/mold-web"} "."
         }
         p {
 "Of course, I had thoughts that if I have no registration, comments, but only "
@@ -104,20 +108,20 @@ code { "night" } "CSS class on the " code { "html" } " element and sets the corr
 "It also may cause some irritating blinking on some devices when navigating the website."
         }
         p {
-"As I wrote above, I’ve chosen " a href="https://actix.rs" target="_blank" { "actix-web" }
+"As I wrote above, I’ve chosen " a href="https://actix.rs" target="_blank" rel="noopener noreferrer" { "actix-web" }
 " as a web server, the pages are stored as templates, and are rendered on the server side, "
 "they contain single JS line of code, and a tiny bit of CSS so your eyes won’t bleed. All the "
 "UI graphics is SVG and " code { "favicon.ico" } " is generated in several sizes out of SVG too. "
-"I’ve chosen " a href="https://crates.io/crates/maud" target="_blank" { "Maud" } " as a "
+"I’ve chosen " a href="https://crates.io/crates/maud" target="_blank" rel="noopener noreferrer" { "Maud" } " as a "
 "template engine - I like how it accepts macros as Rust templates and bakes them into "
 "static strings at compile time. It all sounds good and well, like it will run fast and "
 "take little space, but I was not satisfied yet and thought that if templates are baked "
 "into binary file, it would be cool to also include all the static resources into it! "
 "All of them: styles, graphics, fonts, whatever. And it turned out there is a library for "
-"that: " a href="https://crates.io/crates/includedir" target="_blank" { "includedir" } ". "
+"that: " a href="https://crates.io/crates/includedir" target="_blank" rel="noopener noreferrer" { "includedir" } ". "
 "No sooner said then done. The " code { "includedir" } "crate takes contents of specified "
 "directory and puts it into a binary as byte arrays which are mapped by their relative "
-"paths with the " a href="https://crates.io/crates/phf" target="_blank" { "phf" } " crate. "
+"paths with the " a href="https://crates.io/crates/phf" target="_blank" rel="noopener noreferrer" { "phf" } " crate. "
 "So I’ve used the " code { "phf" } " crate to map articles by their path-id as well."
         }
         p {
@@ -125,9 +129,9 @@ code { "night" } "CSS class on the " code { "html" } " element and sets the corr
 "default does static linking with the all dependencies required to run, which is exactly "
 "what I wanted. But I thought I could make the file even smaller. Among all optimization "
 "options tried, the most helpful was enabling "
-a href = "https://llvm.org/docs/LinkTimeOptimization.html" target ="_blank" { "link time optimization" }
+a href = "https://llvm.org/docs/LinkTimeOptimization.html" target ="_blank" rel="noopener noreferrer" { "link time optimization" }
 ", as it decreased the file size to 1.4Mb, so I’ve turned it on for release builds. "
-"There’s another tool called " a href="https://upx.github.io" target="_blank" { "UPX" }
+"There’s another tool called " a href="https://upx.github.io" target="_blank" rel="noopener noreferrer" { "UPX" }
 " that compressed the binary to only around 900Kb. But how I was surprised when the debug "
 "build in actix-web variant took 70Mb! Fortunately, the release build took only 5.8Mb "
 "and UPX-packed variant just 2Mb."
@@ -135,12 +139,12 @@ a href = "https://llvm.org/docs/LinkTimeOptimization.html" target ="_blank" { "l
         p {
 "When I was done with the blog server, I got curious about how good is the actix-web+maud "
 "bundle in terms of performance. To test the latency I took the "
-a href="https://github.com/wg/wrk" target="_blank" { "WRK Toolkit" }
+a href="https://github.com/wg/wrk" target="_blank" rel="noopener noreferrer" { "WRK Toolkit" }
 " and ran the server on the following setup:"
         }
         ul {
-            li { a href="https://ark.intel.com/products/75044/" target="_blank" { "Intel Core i5-4570S" } }
-            li { a href="https://www.kingston.com/datasheets/KHX16LC10K2_16X.pdf" target="_blank" { "Kingston 16Gb (2x8Gb) DDR3 1600MHz HyperX LoVo" } }
+            li { a href="https://ark.intel.com/products/75044/" target="_blank" rel="noopener noreferrer" { "Intel Core i5-4570S" } }
+            li { a href="https://www.kingston.com/datasheets/KHX16LC10K2_16X.pdf" target="_blank" rel="noopener noreferrer" { "Kingston 16Gb (2x8Gb) DDR3 1600MHz HyperX LoVo" } }
         }
         p {
 "The test lasted for 5 minutes from my laptop connected via LAN, utilizing 8 cores "

@@ -14,13 +14,19 @@ pub static ARTICLES: phf::Map<&'static str, &'static Article> = phf_map! {
 pub struct Article<'a> {
     pub title: &'a str,
     pub date: Date,
-    pub summary:  &'static (Fn() -> Markup + Sync),
+    pub keywords: &'a [&'static str],
+    pub summary: &'static (Fn() -> Markup + Sync),
     pub body: &'static (Fn() -> Markup + Sync),
 }
 
-impl <'a> Article<'a> {
+impl<'a> Article<'a> {
     pub fn render(&self, is_night: bool) -> Markup {
-        template_base(is_night, self.title, html! {
+        template_base(is_night, self.title,
+                      Some(html! {
+            meta name="description" content=((self.summary)());
+            meta name="keywords" content=(self.keywords.join(","));
+        }),
+                      html! {
             span.date { (self.date) }
             h1 { (self.title) }
             ((self.body)())

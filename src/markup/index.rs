@@ -6,7 +6,7 @@ use crate::markup::base::template_base;
 const ARTICLE_URL_PREFIX: &'static str = "/a";
 
 pub fn index(is_night: bool) -> Markup {
-    template_base(is_night, "Mildew", html! {
+    template_base(is_night, "Mildew", None, html! {
         @for (id, article) in ARTICLES.entries().rev() {
             div.article {
                 h3 { a href={ (ARTICLE_URL_PREFIX) "/" (id) } { (article.title) } }
