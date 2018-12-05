@@ -224,11 +224,11 @@ html.night div#header {
     float: right;
     margin: 0.4em 1em;
     font-style: italic;
-    color: #788;
+    color: #505A5A;
 }
 
 html.night .date {
-    color: #566;
+    color: #829DA0;
 }
 
 .article .date {
