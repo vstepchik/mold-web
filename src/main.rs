@@ -11,6 +11,8 @@ extern crate mime_guess;
 extern crate phf;
 extern crate rustls;
 
+use std::env;
+use std::ffi::OsString;
 use std::fs::File;
 use std::io::BufReader;
 
@@ -28,6 +30,10 @@ use crate::static_res::StaticResource;
 mod markup;
 mod cookies;
 mod static_res;
+
+const LOG_ENV_VAR: &str = "RUST_LOG";
+const CERT_LOCATION_VAR: &str = "TLS_CERT";
+const KEY_LOCATION_VAR: &str = "TLS_KEY";
 
 
 fn index(req: &HttpRequest) -> Markup {
@@ -61,6 +67,12 @@ fn not_found(req: &HttpRequest, resp: HttpResponse) -> Result<Response> {
     Ok(Response::Done(builder.body(body)))
 }
 
+fn file_reader(env_var: &str, default: &str) -> BufReader<File> {
+    let path = env::var_os(env_var).unwrap_or_else(|| OsString::from(default));
+    let file = File::open(&path).expect(format!("{:?} not found", path).as_str());
+    BufReader::new(file)
+}
+
 fn create_app() -> App {
     App::new()
         .middleware(Logger::default())
@@ -73,18 +85,17 @@ fn create_app() -> App {
 }
 
 fn main() {
-    const LOG_ENV_VAR: &str = "RUST_LOG";
     let socket = "0.0.0.0:8443";
 
-    if std::env::var_os(LOG_ENV_VAR).is_none() {
-        std::env::set_var(LOG_ENV_VAR, "info");
+    if env::var_os(LOG_ENV_VAR).is_none() {
+        env::set_var(LOG_ENV_VAR, "info");
     }
     env_logger::init();
 
     // load ssl keys
     let mut config = ServerConfig::new(NoClientAuth::new());
-    let cert_file = &mut BufReader::new(File::open("cert.pem").expect("cert.pem not found"));
-    let key_file = &mut BufReader::new(File::open("key.pem").expect("key.pem not found"));
+    let cert_file = &mut file_reader(CERT_LOCATION_VAR, "cert.pem");
+    let key_file = &mut file_reader(KEY_LOCATION_VAR, "key.pem");
     let cert_chain = certs(cert_file).expect("failed to read cert file");
     let mut keys = rsa_private_keys(key_file).expect("failed to read keys file");
     config.set_single_cert(cert_chain, keys.remove(0)).unwrap();
@@ -96,7 +107,7 @@ fn main() {
     );
 
     server::new(|| create_app())
-        .bind_width(socket, move || acceptor.clone())
+        .bind_with(socket, move || acceptor.clone())
         .expect("Unable to bind socket")
         .keep_alive(10)
         .run();
