@@ -9,20 +9,16 @@ extern crate includedir;
 extern crate maud;
 extern crate mime_guess;
 extern crate phf;
-extern crate rustls;
 
 use std::env;
 use std::ffi::OsString;
-use std::fs::File;
-use std::io::BufReader;
 
 use actix_web::{App, http, HttpRequest, HttpResponse, Result, server};
 use actix_web::http::header;
 use actix_web::middleware::{ErrorHandlers, Logger, Response};
 use bytes::Bytes;
 use maud::Markup;
-use rustls::{NoClientAuth, ServerConfig};
-use rustls::internal::pemfile::{certs, rsa_private_keys};
+use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
 
 use crate::markup::ARTICLES;
 use crate::static_res::StaticResource;
@@ -67,10 +63,9 @@ fn not_found(req: &HttpRequest, resp: HttpResponse) -> Result<Response> {
     Ok(Response::Done(builder.body(body)))
 }
 
-fn file_reader(env_var: &str, default: &str) -> BufReader<File> {
-    let path = env::var_os(env_var).unwrap_or_else(|| OsString::from(default));
-    let file = File::open(&path).expect(format!("{:?} not found", path).as_str());
-    BufReader::new(file)
+fn env_default(env_var: &str, default: &str) -> String {
+    env::var_os(env_var).unwrap_or_else(|| OsString::from(default))
+        .into_string().unwrap_or_else(|_| default.to_owned())
 }
 
 fn create_app() -> App {
@@ -90,24 +85,15 @@ fn main() {
     }
     env_logger::init();
 
-    // load ssl keys
-    let mut config = ServerConfig::new(NoClientAuth::new());
-    let cert_file = &mut file_reader(CERT_LOCATION_VAR, "cert.pem");
-    let key_file = &mut file_reader(KEY_LOCATION_VAR, "key.pem");
-    let cert_chain = certs(cert_file).expect("failed to read cert file");
-    let mut keys = rsa_private_keys(key_file).expect("failed to read keys file");
-    config.set_single_cert(cert_chain, keys.remove(0)).unwrap();
-
-    // actix acceptor
-    let acceptor = server::RustlsAcceptor::with_flags(
-        config,
-        server::ServerFlags::HTTP1 | server::ServerFlags::HTTP2,
-    );
+    let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
+    builder.set_private_key_file(env_default(KEY_LOCATION_VAR, "key.pem"), SslFiletype::PEM)
+        .expect("Key not loaded");
+    builder.set_certificate_chain_file(env_default(CERT_LOCATION_VAR, "cert.pem"))
+        .expect("Certificate not loaded");
 
     let socket = "0.0.0.0:8443";
     server::new(|| create_app())
-        .bind_with(socket, move || acceptor.clone())
-        .expect(format!("Unable to bind socket {:?}", socket).as_str())
+        .bind_ssl(socket, builder).expect(format!("Unable to bind socket {:?}", socket).as_str())
         .keep_alive(10)
         .run();
 }
