@@ -85,8 +85,6 @@ fn create_app() -> App {
 }
 
 fn main() {
-    let socket = "0.0.0.0:8443";
-
     if env::var_os(LOG_ENV_VAR).is_none() {
         env::set_var(LOG_ENV_VAR, "info");
     }
@@ -106,9 +104,10 @@ fn main() {
         server::ServerFlags::HTTP1 | server::ServerFlags::HTTP2,
     );
 
+    let socket = "0.0.0.0:8443";
     server::new(|| create_app())
         .bind_with(socket, move || acceptor.clone())
-        .expect("Unable to bind socket")
+        .expect(format!("Unable to bind socket {:?}", socket).as_str())
         .keep_alive(10)
         .run();
 }
