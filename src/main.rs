@@ -79,11 +79,18 @@ fn create_app() -> App {
         .resource("/a/{id}", |r| r.f(article))
 }
 
+fn create_redirect_app() -> App {
+    App::new()
+        .middleware(Logger::default())
+}
+
 fn main() {
     if env::var_os(LOG_ENV_VAR).is_none() {
         env::set_var(LOG_ENV_VAR, "info");
     }
     env_logger::init();
+
+    let sys = actix::System::new("mold-web");
 
     let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
     builder.set_private_key_file(env_default(KEY_LOCATION_VAR, "key.pem"), SslFiletype::PEM)
@@ -95,5 +102,12 @@ fn main() {
     server::new(|| create_app())
         .bind_ssl(socket, builder).expect(format!("Unable to bind socket {:?}", socket).as_str())
         .keep_alive(10)
-        .run();
+        .start();
+
+    server::new(|| create_redirect_app()) // todo: force upgrade
+        .bind("0.0.0.0:8080").unwrap()
+        .workers(1)
+        .start();
+
+    let _ = sys.run();
 }
