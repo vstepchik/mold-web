@@ -1,7 +1,7 @@
 use std::fmt;
 
 use maud::{html, Markup};
-use phf;
+use phf::phf_map;
 
 use crate::markup::base::template_base;
 

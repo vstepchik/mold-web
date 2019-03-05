@@ -1,5 +1,4 @@
-#![feature(plugin, proc_macro_hygiene)]
-#![plugin(phf_macros)]
+#![feature(proc_macro_hygiene)]
 
 extern crate actix;
 extern crate actix_web;
@@ -12,10 +11,14 @@ extern crate phf;
 
 use std::env;
 use std::ffi::OsString;
+use std::fs::File;
+use std::io::BufRead;
+use std::io::BufReader;
 
 use actix_web::{App, http, HttpRequest, HttpResponse, Result, server};
 use actix_web::http::header;
 use actix_web::middleware::{ErrorHandlers, Logger, Response};
+use actix_web::middleware::DefaultHeaders;
 use bytes::Bytes;
 use maud::Markup;
 use openssl::ssl::{SslAcceptor, SslFiletype, SslMethod};
@@ -26,10 +29,12 @@ use crate::static_res::StaticResource;
 mod markup;
 mod cookies;
 mod static_res;
+mod middleware;
 
 const LOG_ENV_VAR: &str = "RUST_LOG";
 const CERT_LOCATION_VAR: &str = "TLS_CERT";
 const KEY_LOCATION_VAR: &str = "TLS_KEY";
+const ACME_KEY_PATH_VAR: &str = "ACME_KEY_PATH";
 
 
 fn index(req: &HttpRequest) -> Markup {
@@ -71,6 +76,13 @@ fn env_default(env_var: &str, default: &str) -> String {
 fn create_app() -> App {
     App::new()
         .middleware(Logger::default())
+        .middleware(DefaultHeaders::new()
+            .header(
+                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+                http::header::STRICT_TRANSPORT_SECURITY,
+                "max-age=63072000; includeSubDomains; preload",
+            )
+        )
         .middleware(ErrorHandlers::new().handler(http::StatusCode::NOT_FOUND, not_found))
         .resource("/", |r| r.f(index))
         .resource("/s/{file}", |r| r.f(static_res))
@@ -82,6 +94,8 @@ fn create_app() -> App {
 fn create_redirect_app() -> App {
     App::new()
         .middleware(Logger::default())
+        .middleware(middleware::AcmeChallengeResponder)
+        .middleware(middleware::RedirectToHttps)
 }
 
 fn main() {
@@ -104,7 +118,7 @@ fn main() {
         .keep_alive(10)
         .start();
 
-    server::new(|| create_redirect_app()) // todo: force upgrade
+    server::new(|| create_redirect_app())
         .bind("0.0.0.0:8080").unwrap()
         .workers(1)
         .start();
