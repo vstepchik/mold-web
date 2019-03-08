@@ -11,9 +11,6 @@ extern crate phf;
 
 use std::env;
 use std::ffi::OsString;
-use std::fs::File;
-use std::io::BufRead;
-use std::io::BufReader;
 
 use actix_web::{App, http, HttpRequest, HttpResponse, Result, server};
 use actix_web::http::header;
@@ -32,6 +29,8 @@ mod static_res;
 mod middleware;
 
 const LOG_ENV_VAR: &str = "RUST_LOG";
+const HTTP_PORT_VAR: &str = "HTTP_PORT";
+const HTTPS_PORT_VAR: &str = "HTTPS_PORT";
 const CERT_LOCATION_VAR: &str = "TLS_CERT";
 const KEY_LOCATION_VAR: &str = "TLS_KEY";
 const ACME_KEY_PATH_VAR: &str = "ACME_KEY_PATH";
@@ -112,14 +111,18 @@ fn main() {
     builder.set_certificate_chain_file(env_default(CERT_LOCATION_VAR, "cert.pem"))
         .expect("Certificate not loaded");
 
-    let socket = "0.0.0.0:8443";
+
+    let socket = format!("0.0.0.0:{}", env_default(HTTPS_PORT_VAR, "8443"));
     server::new(|| create_app())
-        .bind_ssl(socket, builder).expect(format!("Unable to bind socket {:?}", socket).as_str())
+        .bind_ssl(&socket, builder)
+        .expect(format!("Unable to bind socket {:?}", socket).as_str())
         .keep_alive(10)
         .start();
 
+    let socket = format!("0.0.0.0:{}", env_default(HTTP_PORT_VAR, "8080"));
     server::new(|| create_redirect_app())
-        .bind("0.0.0.0:8080").unwrap()
+        .bind(&socket)
+        .expect(format!("Unable to bind socket {:?}", socket).as_str())
         .workers(1)
         .start();
 

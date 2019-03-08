@@ -4,9 +4,8 @@ use std::io::{BufRead, BufReader};
 use actix_web::{http, HttpRequest, HttpResponse, Result};
 use actix_web::http::StatusCode;
 use actix_web::http::Uri;
-use actix_web::http::uri::Scheme;
+use actix_web::http::uri::{PathAndQuery, Scheme};
 use actix_web::middleware::{Middleware, Started};
-use actix_web::middleware::Response;
 
 use crate::ACME_KEY_PATH_VAR;
 use crate::env_default;
@@ -16,23 +15,37 @@ pub struct RedirectToHttps;
 pub struct AcmeChallengeResponder;
 
 impl<S> Middleware<S> for RedirectToHttps {
-    // todo: refactor this
     fn start(&self, req: &HttpRequest<S>) -> Result<Started> {
-        let host = req.connection_info().host().to_owned();
-        let uri = req.uri();
-
-        let hostname = host.split(':').next().map(|v| v.trim()).filter(|v| !v.is_empty());
-        if hostname.is_none() {
-            return Err(actix_web::error::ErrorBadRequest("HTTP Host header is required"));
-        }
-        let hostname = hostname.unwrap();
-        let redirect_uri = Uri::builder().scheme(Scheme::HTTPS).authority(hostname).path_and_query(uri.path_and_query().unwrap().as_str()).build().unwrap();
+        let hostname = Self::get_hostname(req)
+            .ok_or(actix_web::error::ErrorBadRequest("HTTP Host header is required"))?;
+        let redirect_uri = Self::create_redirect_url(hostname.as_str(), req.uri())?;
 
         Ok(Started::Response(
             HttpResponse::build(StatusCode::MOVED_PERMANENTLY)
                 .header(http::header::LOCATION, redirect_uri.to_string())
                 .finish(),
         ))
+    }
+}
+
+impl RedirectToHttps {
+    fn get_hostname<S>(req: &HttpRequest<S>) -> Option<String> {
+        let con_info = req.connection_info();
+        con_info.host()
+            .split(':').next()
+            .map(|v| v.trim().to_owned())
+            .filter(|v| !v.is_empty())
+    }
+
+    fn create_redirect_url(host: &str, uri: &Uri) -> Result<Uri> {
+        let pq = PathAndQuery::from_static("/");
+        let pq = uri.path_and_query().unwrap_or(&pq);
+        Uri::builder()
+            .scheme(Scheme::HTTPS)
+            .authority(host)
+            .path_and_query(pq.as_str())
+            .build()
+            .map_err(http::Error::into)
     }
 }
 
