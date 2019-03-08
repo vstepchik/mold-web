@@ -14,6 +14,7 @@ RUN cargo +nightly build --release
 
 FROM ubuntu:18.04
 
+RUN apt-get update && apt-get install libssl1.1 && apt-get clean
 COPY --from=builder /build/target/release/mold-web /opt
 
 ENTRYPOINT /opt/mold-web
