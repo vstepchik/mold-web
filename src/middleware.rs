@@ -17,7 +17,7 @@ pub struct AcmeChallengeResponder;
 impl<S> Middleware<S> for RedirectToHttps {
     fn start(&self, req: &HttpRequest<S>) -> Result<Started> {
         let hostname = Self::get_hostname(req)
-            .ok_or(actix_web::error::ErrorBadRequest("HTTP Host header is required"))?;
+            .ok_or_else(|| actix_web::error::ErrorBadRequest("HTTP Host header is required"))?;
         let redirect_uri = Self::create_redirect_url(hostname.as_str(), req.uri())?;
 
         Ok(Started::Response(
@@ -70,7 +70,7 @@ impl AcmeChallengeResponder {
         let acme_file = File::open(env_default(ACME_KEY_PATH_VAR, "acme.txt")).ok()?;
 
         let mut lines: Vec<String> = BufReader::new(acme_file).lines()
-            .filter_map(|line| line.ok())
+            .filter_map(Result::ok)
             .filter(|line| !line.trim().is_empty())
             .take(2)
             .collect();

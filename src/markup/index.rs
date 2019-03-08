@@ -3,7 +3,7 @@ use maud::{html, Markup};
 use crate::markup::ARTICLES;
 use crate::markup::base::template_base;
 
-const ARTICLE_URL_PREFIX: &'static str = "/a";
+const ARTICLE_URL_PREFIX: &str = "/a";
 
 pub fn index(is_night: bool) -> Markup {
     template_base(

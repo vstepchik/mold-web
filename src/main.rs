@@ -42,13 +42,13 @@ fn index(req: &HttpRequest) -> Markup {
 }
 
 fn article(req: &HttpRequest) -> Option<Markup> {
-    let id: String = req.match_info().query("id").unwrap_or(String::new());
+    let id: String = req.match_info().query("id").unwrap_or_default();
     let is_night = cookies::is_night_theme(req);
     ARTICLES.get(id.as_str()).map(|a| a.render(is_night))
 }
 
 fn static_res(req: &HttpRequest) -> Option<StaticResource> {
-    let file: String = req.match_info().query("file").unwrap_or(String::new());
+    let file: String = req.match_info().query("file").unwrap_or_default();
     StaticResource::new(file.as_str())
 }
 
@@ -113,16 +113,16 @@ fn main() {
 
 
     let socket = format!("0.0.0.0:{}", env_default(HTTPS_PORT_VAR, "8443"));
-    server::new(|| create_app())
+    server::new(create_app)
         .bind_ssl(&socket, builder)
-        .expect(format!("Unable to bind socket {:?}", socket).as_str())
+        .unwrap_or_else(|_| panic!("Unable to bind socket {:?}", socket))
         .keep_alive(10)
         .start();
 
     let socket = format!("0.0.0.0:{}", env_default(HTTP_PORT_VAR, "8080"));
-    server::new(|| create_redirect_app())
+    server::new(create_redirect_app)
         .bind(&socket)
-        .expect(format!("Unable to bind socket {:?}", socket).as_str())
+        .unwrap_or_else(|_| panic!("Unable to bind socket {:?}", socket))
         .workers(1)
         .start();
 
