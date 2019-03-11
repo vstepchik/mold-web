@@ -55,13 +55,14 @@ html {
 
 body {
     font-family: 'Ubuntu', sans-serif, Arial, sans-serif;
-    color: #454545;
-    font-size: 16px;
+    color: #404060;
+    font-size: 18px;
     margin: 1.6em auto;
     max-width: 800px;
     padding: 1em;
     line-height: 1.4;
-    text-align: justify;
+    letter-spacing: 0.11em;
+    text-align: left;
 }
 
 html.night {
@@ -69,7 +70,7 @@ html.night {
 }
 
 html.night body {
-    color: #bababa;
+    color: #babaca;
 }
 
 html.night blockquote {
@@ -110,6 +111,11 @@ a:visited {
 
 small {
     font-size: .4em;
+}
+
+code {
+    line-height: 1.0;
+    display: inline-block;
 }
 
 div.fancyPositioning div.picture-left {
@@ -202,12 +208,12 @@ img#themeIcon {
     cursor: pointer;
 }
 
-div#header {
+header {
     border-bottom: 1px solid #454545;
     padding: 0.3rem;
 }
 
-html.night div#header {
+html.night header {
     border-bottom: 1px solid #bababa;
 }
 

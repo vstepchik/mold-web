@@ -31,7 +31,7 @@ pub fn template_base(is_night: bool, title: &str, head: Option<Markup>, markup: 
 
 fn header() -> Markup {
     html! {
-        div#header {
+        header {
             a href=("/") {
                 img#logo src=(LOGO_URL) alt="Logo" width="0" height="0";
             }

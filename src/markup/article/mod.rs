@@ -27,9 +27,11 @@ impl<'a> Article<'a> {
             meta name="keywords" content=(self.keywords.join(","));
         }),
                       html! {
-            span.date { (self.date) }
-            h1 { (self.title) }
-            ((self.body)())
+            article {
+                span.date { (self.date) }
+                h1 { (self.title) }
+                ((self.body)())
+            }
         })
     }
 }
