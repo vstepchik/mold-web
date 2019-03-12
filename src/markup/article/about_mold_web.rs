@@ -101,7 +101,7 @@ a href="https://github.com/vstepchik/mold-web" target="_blank" rel="noopener nor
 "There is too much entropy in this world to write even more JS. "
 "I confess, I still had to write one line of JavaScript to make that feature work: switching "
 "the day/night color theme. This line contains single expression that toggles the "
-code { "night" } "CSS class on the " code { "html" } " element and sets the corresponding cookie "
+code { "night" } " CSS class on the " code { "html" } " element and sets the corresponding cookie "
 "so the server would know if it needs to render pages with the night theme when you visit "
 "another page. I like it more than the JS solution: page loads always light, and then when JS is "
 "loaded, it checks the cookie and sets the corresponding class. "
@@ -119,7 +119,7 @@ code { "night" } "CSS class on the " code { "html" } " element and sets the corr
 "into binary file, it would be cool to also include all the static resources into it! "
 "All of them: styles, graphics, fonts, whatever. And it turned out there is a library for "
 "that: " a href="https://crates.io/crates/includedir" target="_blank" rel="noopener noreferrer" { "includedir" } ". "
-"No sooner said then done. The " code { "includedir" } "crate takes contents of specified "
+"No sooner said then done. The " code { "includedir" } " crate takes contents of specified "
 "directory and puts it into a binary as byte arrays which are mapped by their relative "
 "paths with the " a href="https://crates.io/crates/phf" target="_blank" rel="noopener noreferrer" { "phf" } " crate. "
 "So I’ve used the " code { "phf" } " crate to map articles by their path-id as well."
@@ -150,7 +150,7 @@ a href="https://github.com/wg/wrk" target="_blank" rel="noopener noreferrer" { "
 "The test lasted for 5 minutes from my laptop connected via LAN, utilizing 8 cores "
 "and 10 000 concurrent connections, and shown the following results:"
         }
-        p { code { pre {
+        pre { code {
 """# wrk -c 10000 -t 8 -d 300 --latency http://192.168.1.5:80
 Running 5m test @ http://192.168.1.5:80
   8 threads and 10000 connections
@@ -166,7 +166,7 @@ Running 5m test @ http://192.168.1.5:80
   Socket errors: connect 0, read 189, write 12017, timeout 0
 Requests/sec:  84333.95
 Transfer/sec:   81.55MB"""
-         } } }
+         } }
         p {
 "The hecking 84K req/sec! And 90% of the requests finished in under 50ms! There are only 12K "
 "unsuccessful requests out of 25M total (0.048%) under such a load. Under the same conditions "
