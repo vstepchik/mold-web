@@ -56,7 +56,7 @@
 }
 
 html {
-    background-color: #fefefe;
+    background-color: #FEFEFE;
 }
 
 body {
@@ -68,7 +68,7 @@ body {
     padding: 1em;
     line-height: 1.4;
     letter-spacing: 0.11em;
-    text-align: left;
+    text-align: justify;
 }
 
 html.night {
@@ -76,27 +76,23 @@ html.night {
 }
 
 html.night body {
-    color: #babaca;
+    color: #BABACA;
 }
 
 html.night blockquote {
-    color: #dad0c7;
+    color: #DAD0C7;
 }
 
 html.night blockquote:before {
-    color: #bfbfbf;
+    color: #BFBFBF;
 }
 
 html.night a {
-    color: #07a;
+    color: #067EB2;
 }
 
 html.night a:visited {
-    color: #ac5a82;
-}
-
-p {
-    text-indent: 1.5em;
+    color: #A96084;
 }
 
 a {
@@ -104,7 +100,11 @@ a {
 }
 
 a:visited {
-    color: #941352;
+    color: #9E1458;
+}
+
+p {
+    text-indent: 1.5em;
 }
 
 .noselect {
@@ -129,7 +129,7 @@ code {
 }
 
 html.night code {
-    color: #99aacc;
+    color: #99AACC;
 }
 
 div.fancyPositioning div.picture-left {
@@ -228,7 +228,7 @@ header {
 }
 
 html.night header {
-    border-bottom: 1px solid #bababa;
+    border-bottom: 1px solid #BABABA;
 }
 
 #jumpToTop {
