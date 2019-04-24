@@ -33,6 +33,7 @@ const HTTP_PORT_VAR: &str = "HTTP_PORT";
 const HTTPS_PORT_VAR: &str = "HTTPS_PORT";
 const CERT_LOCATION_VAR: &str = "TLS_CERT";
 const KEY_LOCATION_VAR: &str = "TLS_KEY";
+const CA_LOCATION_VAR: &str = "TLS_CA";
 const ACME_KEY_PATH_VAR: &str = "ACME_KEY_PATH";
 
 
@@ -108,8 +109,10 @@ fn main() {
     let mut builder = SslAcceptor::mozilla_intermediate(SslMethod::tls()).unwrap();
     builder.set_private_key_file(env_default(KEY_LOCATION_VAR, "key.pem"), SslFiletype::PEM)
         .expect("Key not loaded");
-    builder.set_certificate_chain_file(env_default(CERT_LOCATION_VAR, "cert.pem"))
+  builder.set_certificate_chain_file(env_default(CERT_LOCATION_VAR, "fullchain.pem"))
         .expect("Certificate not loaded");
+  builder.set_ca_file(env_default(CA_LOCATION_VAR, "chain.pem"))
+    .expect("CA file not loaded");
 
 
     let socket = format!("0.0.0.0:{}", env_default(HTTPS_PORT_VAR, "8443"));
