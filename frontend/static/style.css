@@ -259,12 +259,12 @@ blockquote:after {
     }
 }
 
-img#logo, img#themeIcon {
+img#logo, img#theme-icon {
     width: 3rem;
     height: 3rem;
 }
 
-img#themeIcon {
+img#theme-icon {
     float: right;
     cursor: pointer;
 }
@@ -278,13 +278,13 @@ html.night header {
     border-bottom: 1px solid #BABABA;
 }
 
-#jumpToTop {
+#jump-to-top {
     position: fixed;
     left: 0.5rem;
     bottom: 2rem;
 }
 
-#jumpToTop img {
+#jump-to-top img {
     width: 2rem;
     height: 2rem;
     cursor: pointer;
