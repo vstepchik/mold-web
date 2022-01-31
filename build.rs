@@ -1,10 +1,16 @@
-extern crate includedir_codegen;
+use static_files::NpmBuild;
+use std::fs;
 
-use includedir_codegen::Compression;
+const STATIC_OUTPUT_DIR: &str = "frontend/dist/bundle";
 
-fn main() {
-    includedir_codegen::start("FILES")
-        .dir("data", Compression::Gzip)
-        .build("data.rs")
-        .unwrap();
+fn main() -> std::io::Result<()> {
+    fs::create_dir_all(STATIC_OUTPUT_DIR)?;
+    NpmBuild::new("frontend")
+        .executable("yarn")
+        .install()?
+        .run("build")?
+        .target(STATIC_OUTPUT_DIR)
+        .change_detection()
+        .to_resource_dir()
+        .build()
 }

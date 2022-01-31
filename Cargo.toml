@@ -6,24 +6,26 @@ authors = ["Vitalik Stepchik <vitalatron@gmail.com>"]
 include = ["data/**"]
 
 [dependencies]
-actix = "0.7"
-actix-web = { version = "0.7", features=["alpn"] }
+actix-web = { version = "3", features=["openssl"] }
+actix-web-static-files = { git="https://github.com/kilork/actix-web-static-files", branch="master" }
+actix-web-middleware-redirect-scheme = "3"
+static-files = "0.2.1"
 openssl = { version = "0.10", features = ["v110"] }
 serde = "1.0"
 serde_derive = "1.0"
 serde_json = "1.0"
-maud = { version = "0.19", features = ["actix-web"] }
-mime_guess = "2.0.0-alpha.6"
-phf = { version = "0.7", features=["macros"] }
-includedir = "0.4"
-bytes = "0.4"
-log = { version = "0.4", features = ["max_level_debug", "release_max_level_info"] }
-env_logger = "0.6"
+maud = { version = "0.23", features = ["actix-web"] }
+mime_guess = "2.0.3"
+phf = "0.8"
+includedir = "0.6"
+bytes = "1.1"
+log = "0.4.14"
+env_logger = "0.9"
 
 [build-dependencies]
-includedir_codegen = "0.4"
+static-files = "0.2.1"
+includedir_codegen = "0.6"
 
 [profile.release]
-# disabled lto until https://github.com/rust-lang/rust/issues/62896 is resolved
-lto = false
+lto = true
 codegen-units = 1
