@@ -9,10 +9,10 @@ TODO:
 * [x] Redirect from HTTP to HTTPS
 * [ ] Show index page
 * [ ] Show articles
-* [ ] Shor error page
+* [x] Shor error page
 * [ ] Ensure resources are served:
   * [x] just served
-  * [ ] compressed
+  * [x] compressed
   * [ ] in parallel with HTTP/2
 * [ ] [Use CORS for fonts](https://caniuse.com/?search=fontface)
 * [ ] Cleanup Dockerfile
@@ -22,6 +22,7 @@ TODO:
 * [ ] https://infosec.mozilla.org/guidelines/web_security#x-frame-options
 * [ ] https://infosec.mozilla.org/guidelines/web_security#cross-origin-resource-sharing
 * [ ] https://infosec.mozilla.org/guidelines/web_security#subresource-integrity
+* [ ] CI
 
 
 ## Dev deps:

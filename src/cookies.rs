@@ -1,11 +1,9 @@
 use std::str::FromStr;
 
-use actix_web::HttpRequest;
+use actix_web::{HttpMessage, HttpRequest};
 
 pub fn is_night_theme(req: &HttpRequest) -> bool {
-    const DEFAULT: bool = false;
-
     req.cookie("night")
-        .map(|cookie| bool::from_str(cookie.value()).unwrap_or(DEFAULT))
-        .unwrap_or(DEFAULT)
+        .and_then(|cookie| bool::from_str(cookie.value()).ok())
+        .unwrap_or(false)
 }

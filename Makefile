@@ -7,4 +7,7 @@ clean:
 build:
 	cargo build --release
 
-.PHONY: all clean build
+run: build
+	cargo run --release
+
+.PHONY: all clean build run
