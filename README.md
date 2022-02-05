@@ -7,8 +7,10 @@ TODO:
   * [x] Linters
   * [x] Postprocessors
 * [x] Redirect from HTTP to HTTPS
-* [ ] Show index page
-* [ ] Show articles
+* [x] Show index page
+* [x] Show articles
+* [ ] Show 404 under /a/bla if bla not found
+* [ ] Use PHF codegen to gather articles
 * [x] Shor error page
 * [ ] Ensure resources are served:
   * [x] just served
@@ -17,6 +19,7 @@ TODO:
 * [ ] [Use CORS for fonts](https://caniuse.com/?search=fontface)
 * [ ] Cleanup Dockerfile
 * [ ] make_favicon.sh -> Makefile
+* [ ] [Detect](https://stackoverflow.com/questions/56393880/how-do-i-detect-dark-mode-using-javascript) preferred theme
 * [ ] helper script to check & notify dev dependencies installed
 * [ ] https://securityheaders.com/
 * [ ] https://infosec.mozilla.org/guidelines/web_security#x-frame-options

@@ -1,5 +1,5 @@
 use actix_web::middleware::{Compress, Logger};
-use actix_web::{web, App, HttpRequest, HttpServer, Responder};
+use actix_web::{web, App, HttpServer};
 use actix_web_middleware_redirect_scheme::RedirectSchemeBuilder;
 use actix_web_static_files::ResourceFiles;
 use std::env;
@@ -15,11 +15,6 @@ const PORT_VAR: &str = "PORT";
 // const ACME_KEY_PATH_VAR: &str = "ACME_KEY_PATH";
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
-
-async fn greet(req: HttpRequest) -> impl Responder {
-    let name = req.match_info().get("name").unwrap_or("World");
-    format!("Hello {}!", &name)
-}
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -42,8 +37,8 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default())
             .wrap(RedirectSchemeBuilder::new().enable(!disable_https).build()) // redirect HTTP -> HTTPS
             .wrap(Compress::default())
-            .route("/", web::get().to(greet))
-            .route("/name/{name}", web::get().to(greet))
+            .route("/", web::get().to(markup::index))
+            .route("/a/{article_id}", web::get().to(markup::article))
             .service(ResourceFiles::new("/s", generated).do_not_resolve_defaults())
             .default_service(web::route().to(markup::e404))
     })
