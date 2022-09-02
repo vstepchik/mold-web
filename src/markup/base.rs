@@ -1,7 +1,7 @@
 use maud::{html, Markup, DOCTYPE};
 
 const FAVICON_URL: &str = "/favicon.ico";
-const CSS_URL: &str = "/s/style.css";
+const CSS_URL: &str = "/s/main.css";
 
 const LOGO_URL: &str = "/s/logo.svg";
 const THEME_ICON_URL: &str = "/s/day-and-night.svg";
