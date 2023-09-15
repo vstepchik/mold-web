@@ -16,6 +16,7 @@ TODO:
   * [x] just served
   * [x] compressed
   * [ ] in parallel with HTTP/2
+  * [ ] favicon.ico and robots.txt from root
 * [ ] [Use CORS for fonts](https://caniuse.com/?search=fontface)
 * [ ] Cleanup Dockerfile
 * [ ] make_favicon.sh -> Makefile
