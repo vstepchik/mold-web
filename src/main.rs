@@ -1,46 +1,86 @@
 use actix_web::middleware::{Compress, Logger};
-use actix_web::{web, App, HttpServer};
-use actix_web_static_files::ResourceFiles;
-use std::collections::HashMap;
-use std::env;
+use actix_web::{App, HttpServer};
+use clap::Parser;
 
+mod config;
 mod cookies;
 mod markup;
-
-const PORT_VAR: &str = "PORT";
-
-include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     env_logger::init();
-    let port = env::var_os(PORT_VAR)
-        .map(|v| {
-            v.to_string_lossy()
-                .parse::<u16>()
-                .unwrap_or_else(|_| panic!("Invalid port: {:?}", v))
-        })
-        .unwrap_or(8080);
+    let cfg = config::Config::parse();
 
     HttpServer::new(move || {
-        let generated = generate();
-        let mut files_at_root: HashMap<&str, static_files::Resource> = HashMap::new();
-        let robots = generated.get("robots.txt").unwrap();
-        let robots = static_files::resource::new_resource(robots.data, robots.modified, robots.mime_type);
-        let favicon = generated.get("favicon.ico").unwrap();
-        let favicon = static_files::resource::new_resource(favicon.data, favicon.modified, favicon.mime_type);
-        files_at_root.insert("robots.txt", robots);
-        files_at_root.insert("favicon.ico", favicon); // todo: fix it the proper way
         App::new()
             .wrap(Logger::default())
             .wrap(Compress::default())
-            .route("/", web::get().to(markup::index))
-            .route("/a/{article_id}", web::get().to(markup::article))
-            .service(ResourceFiles::new("/s", generated).do_not_resolve_defaults())
-            .service(ResourceFiles::new("/", files_at_root).do_not_resolve_defaults())
-            .default_service(web::route().to(markup::e404))
+            .configure(config::configuration)
     })
-    .bind(("0.0.0.0", port))?
+    .bind((cfg.address, cfg.http_port))?
     .run()
     .await
+}
+
+#[cfg(test)]
+mod integration_tests {
+    use actix_web::http::StatusCode;
+    use actix_web::{http::header, test, App};
+
+    use super::*;
+
+    #[actix_web::test]
+    async fn test_index_get() {
+        let app = test::init_service(App::new().configure(config::configuration)).await;
+
+        let req = test::TestRequest::default().to_request();
+        let resp = test::call_service(&app, req).await;
+
+        assert!(resp.status().is_success());
+        assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "text/html; charset=utf-8");
+    }
+
+    #[actix_web::test]
+    async fn test_robots_get() {
+        let app = test::init_service(App::new().configure(config::configuration)).await;
+
+        let req = test::TestRequest::default().uri("/robots.txt").to_request();
+        let resp = test::call_service(&app, req).await;
+
+        assert!(resp.status().is_success());
+        assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "text/plain");
+        let body = test::read_body(resp).await;
+        let body_str = std::str::from_utf8(&body).unwrap();
+        assert!(body_str.contains("User-agent:"));
+        assert!(body_str.contains("Allow:"));
+        assert!(body_str.contains("Disallow:"));
+    }
+
+    #[actix_web::test]
+    async fn test_favicon_get() {
+        let app = test::init_service(App::new().configure(config::configuration)).await;
+
+        let req = test::TestRequest::default().uri("/favicon.ico").to_request();
+        let resp = test::call_service(&app, req).await;
+
+        assert!(resp.status().is_success());
+        assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "image/x-icon");
+        let body = test::read_body(resp).await;
+        let file = std::fs::read("frontend/static/favicon.ico").unwrap();
+        assert_eq!(body, file);
+    }
+
+    #[actix_web::test]
+    async fn test_not_found_get() {
+        let app = test::init_service(App::new().configure(config::configuration)).await;
+
+        let req = test::TestRequest::default().uri("/unknown-resource").to_request();
+        let resp = test::call_service(&app, req).await;
+
+        assert_eq!(resp.status(), StatusCode::NOT_FOUND);
+        // assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "text/html; charset=utf-8");
+        let body = test::read_body(resp).await;
+        let body_str = std::str::from_utf8(&body).unwrap();
+        assert_eq!(body_str, "");
+    }
 }
