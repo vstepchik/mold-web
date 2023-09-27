@@ -1,6 +1,6 @@
 use std::str::FromStr;
 
-use actix_web::{HttpMessage, HttpRequest};
+use actix_web::HttpRequest;
 
 pub fn is_night_theme(req: &HttpRequest) -> bool {
     req.cookie("night")
