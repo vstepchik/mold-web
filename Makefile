@@ -1,7 +1,7 @@
 all: clean build
 
 clean:
-	rm -rd ./frontend/dist
+	-rm -rd ./frontend/dist
 	cargo clean
 
 build:
