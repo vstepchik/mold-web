@@ -44,7 +44,15 @@ pub fn configuration(cfg: &mut web::ServiceConfig) {
 
     cfg.route("/", web::get().to(markup::index))
         .route("/a/{article_id}", web::get().to(markup::article))
-        .service(ResourceFiles::new("/s", generated).do_not_resolve_defaults())
-        .service(ResourceFiles::new("/", files_at_root).do_not_resolve_defaults())
-        .default_service(web::route().to(markup::e404));
+        .service(
+            ResourceFiles::new("/s", generated)
+                .skip_handler_when_not_found()
+                .do_not_resolve_defaults(),
+        )
+        .service(
+            ResourceFiles::new("/", files_at_root)
+                .skip_handler_when_not_found()
+                .do_not_resolve_defaults(),
+        )
+        .default_service(web::get().to(markup::e404));
 }
