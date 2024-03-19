@@ -13,11 +13,11 @@ use crate::markup;
 #[command(author, version, about, long_about = None)]
 pub struct Config {
     /// IP-address to allow connections from
-    #[arg(short, long, default_value_t = Ipv4Addr::LOCALHOST)]
+    #[arg(short, long, default_value_t = Config::default().address)]
     pub address: Ipv4Addr,
 
     /// Network port to listen for HTTP connections
-    #[arg(short = 'p', long, default_value_t = 8080)]
+    #[arg(short = 'p', long, default_value_t = Config::default().http_port)]
     pub http_port: u16,
 }
 
