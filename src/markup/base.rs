@@ -1,11 +1,11 @@
 use maud::{html, Markup, DOCTYPE};
 
 const FAVICON_URL: &str = "/favicon.ico";
-const CSS_URL: &str = "/s/main.css";
+const CSS_URL: &str = "/main.css";
 
-const LOGO_URL: &str = "/s/logo.svg";
-const THEME_ICON_URL: &str = "/s/day-and-night.svg";
-const JUMP_TO_TOP_ICON_URL: &str = "/s/top.svg";
+const LOGO_URL: &str = "/logo.svg";
+const THEME_ICON_URL: &str = "/day-and-night.svg";
+const JUMP_TO_TOP_ICON_URL: &str = "/top.svg";
 
 pub fn template_base(is_night: bool, title: &str, head: Option<Markup>, markup: Markup) -> Markup {
     html! {

@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 use std::env;
 use std::net::Ipv4Addr;
 
@@ -34,23 +33,11 @@ include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
 pub fn configuration(cfg: &mut web::ServiceConfig) {
     let generated = generate();
-    let mut files_at_root: HashMap<&str, static_files::Resource> = HashMap::new();
-    let robots = generated.get("robots.txt").unwrap();
-    let robots = static_files::resource::new_resource(robots.data, robots.modified, robots.mime_type);
-    let favicon = generated.get("favicon.ico").unwrap();
-    let favicon = static_files::resource::new_resource(favicon.data, favicon.modified, favicon.mime_type);
-    files_at_root.insert("robots.txt", robots);
-    files_at_root.insert("favicon.ico", favicon); // todo: fix it the proper way
 
     cfg.route("/", web::get().to(markup::index))
         .route("/a/{article_id}", web::get().to(markup::article))
         .service(
-            ResourceFiles::new("/s", generated)
-                .skip_handler_when_not_found()
-                .do_not_resolve_defaults(),
-        )
-        .service(
-            ResourceFiles::new("/", files_at_root)
+            ResourceFiles::new("/", generated)
                 .skip_handler_when_not_found()
                 .do_not_resolve_defaults(),
         )
