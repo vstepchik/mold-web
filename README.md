@@ -24,6 +24,7 @@ TODO:
 * [ ] https://infosec.mozilla.org/guidelines/web_security#cross-origin-resource-sharing
 * [ ] https://infosec.mozilla.org/guidelines/web_security#subresource-integrity
 * [ ] CI
+* [ ] [Setup favicon properly](https://dev.to/masakudamatsu/favicon-nightmare-how-to-maintain-sanity-3al7)
 
 Obsolete:
 * To be done by NGINX:
