@@ -78,9 +78,9 @@ mod integration_tests {
         let resp = test::call_service(&app, req).await;
 
         assert_eq!(resp.status(), StatusCode::NOT_FOUND);
-        // assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "text/html; charset=utf-8");
+        assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "text/html; charset=utf-8");
         let body = test::read_body(resp).await;
         let body_str = std::str::from_utf8(&body).unwrap();
-        assert_eq!(body_str, "");
+        assert!(body_str.to_lowercase().contains("404"));
     }
 }
