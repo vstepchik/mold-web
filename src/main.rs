@@ -83,4 +83,18 @@ mod integration_tests {
         let body_str = std::str::from_utf8(&body).unwrap();
         assert!(body_str.to_lowercase().contains("404"));
     }
+
+    #[actix_web::test]
+    async fn test_unresolfed_article_returns_not_found() {
+        let app = test::init_service(App::new().configure(config::configuration)).await;
+
+        let req = test::TestRequest::default().uri("/a/unknown-article.html").to_request();
+        let resp = test::call_service(&app, req).await;
+
+        assert_eq!(resp.status(), StatusCode::NOT_FOUND);
+        assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "text/html; charset=utf-8");
+        let body = test::read_body(resp).await;
+        let body_str = std::str::from_utf8(&body).unwrap();
+        assert!(body_str.to_lowercase().contains("404"));
+    }
 }

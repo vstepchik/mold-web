@@ -16,7 +16,7 @@ pub async fn index(req: HttpRequest) -> Markup {
     let content_markup = html! {
         @for (id, article) in ARTICLES.entries().rev() {
             div.article {
-                h3 { a href={ (ARTICLE_URL_PREFIX) "/" (id) } { (article.title) } }
+                h3 { a href={ (ARTICLE_URL_PREFIX) "/" (id) ".html" } { (article.title) } }
                 p {
                     ((article.summary)())
                     span.date { (article.date) }
