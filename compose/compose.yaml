@@ -1,4 +1,15 @@
 services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - mold-web
+    networks:
+      - mold-net
+
   mold-web:
     image: mold-web:latest
     user: nonroot

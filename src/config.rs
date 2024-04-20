@@ -23,7 +23,7 @@ pub struct Config {
 impl Default for Config {
     fn default() -> Self {
         Self {
-            address: Ipv4Addr::LOCALHOST,
+            address: Ipv4Addr::UNSPECIFIED,
             http_port: 8080,
         }
     }

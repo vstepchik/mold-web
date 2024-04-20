@@ -6,7 +6,7 @@ frontend_static_dir := "frontend/static"
 image_name := "mold-web"
 
 # Clean, build, and test the project
-default: clean build test
+default: clean build_backend test
 
 # Clean the project
 clean:
@@ -14,7 +14,7 @@ clean:
   cargo clean
 
 # Build the project
-build:
+build_backend: build_frontend
   cargo build --release
 
 # Run the tests
@@ -22,15 +22,17 @@ test:
   cargo test --release
 
 # Build the front-end package
-build_fe:
+build_frontend:
   yarn --cwd ./frontend install
   yarn --cwd ./frontend build
 
 # Build and run the project
-run: build
+run: build_backend
   cargo run --release
 
 ### ====== Assets
+
+make_assets: make_favicon
 
 make_favicon:
   convert -background none -density 384 {{assets_src_img_dir}}/logo.svg -define "icon:auto-resize=64,32,16" "{{frontend_static_dir}}/favicon.ico"
@@ -49,3 +51,7 @@ build_image:
 compose_up:
   {{ if `just --quiet image_exists` == "0" { `just build_image` } else { `` } }}
   docker-compose -f ./compose/compose.yaml up --build --detach
+
+# Shutdown docker-compose
+compose_up:
+  docker-compose -f ./compose/compose.yaml down
