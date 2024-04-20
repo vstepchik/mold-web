@@ -25,7 +25,7 @@ pub const RUST: Icon = Icon {
 pub fn icon(ico: Icon) -> Markup {
     html! {
         a href=(ico.link) target="_blank" rel="noopener noreferrer" {
-            img.icon src={ "/s/" (ico.href) } alt=(ico.alt);
+            img.icon src={ "/" (ico.href) } alt=(ico.alt);
         }
     }
 }

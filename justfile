@@ -8,6 +8,10 @@ image_name := "mold-web"
 # Clean, build, and test the project
 default: clean build_backend test
 
+@check_dev_dependencies:
+  echo "This is an {{arch()}} machine running {{os()}}".
+  for dep in cargo docker yarn convert; do command -v $dep >/dev/null && echo "$dep - ok" || echo "$dep - not found on PATH"; done
+
 # Clean the project
 clean:
   -rm -rd ./frontend/dist
@@ -53,5 +57,5 @@ compose_up:
   docker-compose -f ./compose/compose.yaml up --build --detach
 
 # Shutdown docker-compose
-compose_up:
+compose_down:
   docker-compose -f ./compose/compose.yaml down

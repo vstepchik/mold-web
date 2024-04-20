@@ -9,20 +9,18 @@ TODO:
 * [x] Show index page
 * [x] Show articles
 * [ ] Show 404 under /a/bla if bla not found
-* [ ] Use PHF codegen to gather articles
 * [x] Shor error page
 * [x] Ensure resources are served:
   * [x] just served
   * [x] favicon.ico and robots.txt from root
-* [ ] [Use CORS for fonts](https://caniuse.com/?search=fontface)
 * [x] Cleanup Dockerfile
 * [x] make_favicon.sh -> justfile
 * [ ] [Detect](https://stackoverflow.com/questions/56393880/how-do-i-detect-dark-mode-using-javascript) preferred theme
-* [ ] helper script to check & notify [dev dependencies](#dev-deps) installed
+* [x] helper script to check & notify [dev dependencies](#dev-deps) installed
 * [ ] https://securityheaders.com/
-* [ ] https://infosec.mozilla.org/guidelines/web_security#x-frame-options
-* [ ] https://infosec.mozilla.org/guidelines/web_security#cross-origin-resource-sharing
-* [ ] https://infosec.mozilla.org/guidelines/web_security#subresource-integrity
+* [x] https://infosec.mozilla.org/guidelines/web_security#x-frame-options
+* [x] https://infosec.mozilla.org/guidelines/web_security#cross-origin-resource-sharing
+* [x] https://infosec.mozilla.org/guidelines/web_security#subresource-integrity
 * [ ] CI
 * [ ] [Setup favicon properly](https://dev.to/masakudamatsu/favicon-nightmare-how-to-maintain-sanity-3al7)
 
@@ -31,10 +29,3 @@ Obsolete:
   * Redirect from HTTP to HTTPS
   * Response compression
   * HTTP/2 multiplexing, HTTP3
-
-## Dev deps:
-
-1. rustup
-2. npm + yarn
-3. dart sass (brew install sass/sass/sass)
-4. imagemagick
