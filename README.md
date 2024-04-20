@@ -11,12 +11,12 @@ TODO:
 * [ ] Show 404 under /a/bla if bla not found
 * [ ] Use PHF codegen to gather articles
 * [x] Shor error page
-* [ ] Ensure resources are served:
+* [x] Ensure resources are served:
   * [x] just served
-  * [ ] favicon.ico and robots.txt from root
+  * [x] favicon.ico and robots.txt from root
 * [ ] [Use CORS for fonts](https://caniuse.com/?search=fontface)
-* [ ] Cleanup Dockerfile
-* [ ] make_favicon.sh -> Makefile
+* [x] Cleanup Dockerfile
+* [x] make_favicon.sh -> justfile
 * [ ] [Detect](https://stackoverflow.com/questions/56393880/how-do-i-detect-dark-mode-using-javascript) preferred theme
 * [ ] helper script to check & notify [dev dependencies](#dev-deps) installed
 * [ ] https://securityheaders.com/

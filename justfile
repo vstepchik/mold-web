@@ -1,5 +1,8 @@
 set dotenv-load
 
+asset_src_dir := "assets/src"
+assets_src_img_dir := asset_src_dir / "img"
+frontend_static_dir := "frontend/static"
 image_name := "mold-web"
 
 # Clean, build, and test the project
@@ -26,6 +29,13 @@ build_fe:
 # Build and run the project
 run: build
   cargo run --release
+
+### ====== Assets
+
+make_favicon:
+  convert -background none -density 384 {{assets_src_img_dir}}/logo.svg -define "icon:auto-resize=64,32,16" "{{frontend_static_dir}}/favicon.ico"
+
+### ====== Docker
 
 # Helper recipe to check if the Docker image exists
 image_exists:
