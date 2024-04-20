@@ -1,20 +1,16 @@
-FROM rust as builder
+FROM rust:latest as builder
 
-RUN rustup toolchain install nightly
+RUN apt update -y && apt install -y yarn
 
-WORKDIR /build/
-COPY build.rs Cargo.toml Cargo.lock ./
-COPY data ./data/
-COPY src ./src/
-
-RUN cargo +nightly build --release
-# todo: UPX the binary
+WORKDIR /usr/src/mold-web
+COPY . .
+RUN cargo build --release
 
 # ---
 
-FROM ubuntu:18.04
+FROM gcr.io/distroless/cc-debian12
 
-RUN apt-get update && apt-get install libssl1.1 && apt-get clean
-COPY --from=builder /build/target/release/mold-web /opt
+COPY --from=builder --chown=nonroot /usr/src/mold-web/target/release/mold-web /opt/mold-web
+USER nonroot
 
-ENTRYPOINT /opt/mold-web
+ENTRYPOINT ["/opt/mold-web"]

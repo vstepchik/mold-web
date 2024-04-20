@@ -1,0 +1,32 @@
+services:
+  mold-web:
+    image: mold-web:latest
+    user: nonroot
+    ports:
+      - "8880:8080"
+    networks:
+      - mold-net
+    environment:
+      RUST_LOG: INFO
+      DATABASE_URL: "postgresql://mold-postgres-local/"
+    hostname: mold-web-local
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    networks:
+      - mold-net
+    ports:
+      - "5432:5432"
+    hostname: mold-postgres-local
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+networks:
+  mold-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
