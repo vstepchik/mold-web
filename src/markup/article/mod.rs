@@ -1,17 +1,18 @@
-use actix_web::HttpRequest;
+use actix_web::{HttpRequest, ResponseError};
 use std::fmt;
 
 use crate::cookies::is_night_theme;
 use maud::{html, Markup};
 use phf::phf_map;
 
+use crate::error::UserError;
 use crate::markup::base::template_base;
 
 mod about_mold_web;
 
-pub async fn article(req: HttpRequest) -> Option<Markup> {
+pub async fn article(req: HttpRequest) -> Result<Markup, impl ResponseError> {
     let article_id = req.match_info().get("article_id").unwrap();
-    render_article(is_night_theme(&req), article_id)
+    render_article(is_night_theme(&req), article_id).ok_or(UserError::ResourceNotFound { resource: req.uri().to_string(), is_night: is_night_theme(&req) })
 }
 
 fn render_article(is_night: bool, id: &str) -> Option<Markup> {

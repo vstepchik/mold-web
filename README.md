@@ -8,7 +8,7 @@ TODO:
   * [x] Postprocessors
 * [x] Show index page
 * [x] Show articles
-* [ ] Show 404 under /a/bla if bla not found
+* [x] Show 404 under /a/bla if bla not found
 * [x] Shor error page
 * [x] Ensure resources are served:
   * [x] just served

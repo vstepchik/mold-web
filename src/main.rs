@@ -4,6 +4,7 @@ use clap::Parser;
 
 mod config;
 mod cookies;
+mod error;
 mod markup;
 
 #[actix_web::main]
@@ -37,7 +38,10 @@ mod integration_tests {
         let resp = test::call_service(&app, req).await;
 
         assert!(resp.status().is_success());
-        assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "text/html; charset=utf-8");
+        assert_eq!(
+            resp.headers().get(header::CONTENT_TYPE).expect("No Content-Type header"),
+            "text/html; charset=utf-8"
+        );
     }
 
     #[actix_web::test]
@@ -48,9 +52,12 @@ mod integration_tests {
         let resp = test::call_service(&app, req).await;
 
         assert!(resp.status().is_success());
-        assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "text/plain");
+        assert_eq!(
+            resp.headers().get(header::CONTENT_TYPE).expect("No Content-Type header"),
+            "text/plain"
+        );
         let body = test::read_body(resp).await;
-        let body_str = std::str::from_utf8(&body).unwrap();
+        let body_str = std::str::from_utf8(&body).expect("No response body");
         assert!(body_str.contains("User-agent:"));
         assert!(body_str.contains("Allow:"));
         assert!(body_str.contains("Disallow:"));
@@ -64,9 +71,12 @@ mod integration_tests {
         let resp = test::call_service(&app, req).await;
 
         assert!(resp.status().is_success());
-        assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "image/x-icon");
+        assert_eq!(
+            resp.headers().get(header::CONTENT_TYPE).expect("No Content-Type header"),
+            "image/x-icon"
+        );
         let body = test::read_body(resp).await;
-        let file = std::fs::read("frontend/static/favicon.ico").unwrap();
+        let file = std::fs::read("frontend/static/favicon.ico").expect("Example file not found");
         assert_eq!(body, file);
     }
 
@@ -78,9 +88,12 @@ mod integration_tests {
         let resp = test::call_service(&app, req).await;
 
         assert_eq!(resp.status(), StatusCode::NOT_FOUND);
-        assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "text/html; charset=utf-8");
+        assert_eq!(
+            resp.headers().get(header::CONTENT_TYPE).expect("No Content-Type header"),
+            "text/html; charset=utf-8"
+        );
         let body = test::read_body(resp).await;
-        let body_str = std::str::from_utf8(&body).unwrap();
+        let body_str = std::str::from_utf8(&body).expect("No response body");
         assert!(body_str.to_lowercase().contains("404"));
     }
 
@@ -92,7 +105,10 @@ mod integration_tests {
         let resp = test::call_service(&app, req).await;
 
         assert_eq!(resp.status(), StatusCode::NOT_FOUND);
-        assert_eq!(resp.headers().get(header::CONTENT_TYPE).unwrap(), "text/html; charset=utf-8");
+        assert_eq!(
+            resp.headers().get(header::CONTENT_TYPE).expect("No Content-Type header"),
+            "text/html; charset=utf-8"
+        );
         let body = test::read_body(resp).await;
         let body_str = std::str::from_utf8(&body).unwrap();
         assert!(body_str.to_lowercase().contains("404"));

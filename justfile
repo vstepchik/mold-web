@@ -23,7 +23,7 @@ build_backend: build_frontend
 
 # Run the tests
 test:
-  cargo test --release
+  cargo test
 
 # Build the front-end package
 build_frontend:

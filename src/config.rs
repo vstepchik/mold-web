@@ -35,11 +35,14 @@ pub fn configuration(cfg: &mut web::ServiceConfig) {
     let generated = generate();
 
     cfg.route("/", web::get().to(markup::index))
-        .route("/a/{article_id}.html", web::get().to(markup::article))
+        .service(
+            web::resource("/a/{article_id}.html")
+                .route(web::get().to(markup::article)),
+        )
         .service(
             ResourceFiles::new("/", generated)
                 .skip_handler_when_not_found()
                 .do_not_resolve_defaults(),
         )
-        .default_service(web::get().to(markup::e404));
+        .default_service(web::get().to(markup::e404_handler));
 }
