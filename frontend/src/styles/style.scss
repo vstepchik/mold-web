@@ -1,0 +1,223 @@
+@import "palette";
+
+html {
+  background-color: $clr-bg-day;
+}
+
+body {
+  font-family: "Open Sans", Arial, sans-serif;
+  color: $clr-fg-day;
+  font-size: 18px;
+  margin: 1.6em auto;
+  max-width: 800px;
+  padding: 1em;
+  line-height: 1.4;
+  letter-spacing: 0.11em;
+  text-align: justify;
+}
+
+html.night {
+  background-color: $clr-bg-ngt;
+}
+
+html.night body {
+  color: $clr-fg-ngt;
+}
+
+a {
+  color: $clr-a-day;
+}
+
+a:visited {
+  color: $clr-a-visited-day;
+}
+
+html.night a {
+  color: $clr-a-ngt;
+}
+
+html.night a:visited {
+  color: $clr-a-visited-ngt;
+}
+
+p {
+  text-indent: 1.5em;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+small {
+  font-size: 0.4em;
+}
+
+code {
+  font-family: "Fira Mono", monospace;
+  letter-spacing: 0;
+  color: $clr-code-fg-day;
+  box-shadow: inset 0 0 20px -15px;
+  border-radius: 0.2em;
+}
+
+pre code {
+  line-height: 1;
+  display: inline-block;
+}
+
+html.night code {
+  color: $clr-code-fg-ngt;
+}
+
+ul li img {
+  height: 1em;
+}
+
+div.fancy-positioning div.picture-left {
+  float: left;
+  width: 40%;
+  overflow: hidden;
+  margin-right: 1em;
+}
+
+div.fancy-positioning div.picture-left img {
+  width: 100%;
+}
+
+div.fancy-positioning div.picture-left p.caption {
+  font-size: 0.7em;
+}
+
+div.fancy-positioning div.tleft {
+  float: left;
+  width: 55%;
+}
+
+div.fancy-positioning div.tleft p:first-child {
+  margin-top: 0;
+}
+
+div.fancy-positioning::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+blockquote {
+  color: $clr-blockquote-fg-day;
+  margin-left: 0;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+blockquote span {
+  float: left;
+  margin-left: 1rem;
+  padding-top: 1rem;
+}
+
+blockquote::before {
+  font-family: "Times New Roman", Times, Arial, sans-serif;
+  color: $clr-before-blockquote-fg-day;
+  content: open-quote;
+  font-size: 2.2em;
+  font-weight: 600;
+  float: left;
+  margin-top: 0;
+  margin-right: 0.2rem;
+  width: 1.2rem;
+}
+
+blockquote::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+html.night blockquote {
+  color: $clr-blockquote-fg-ngt;
+}
+
+html.night blockquote::before {
+  color: $clr-before-blockquote-fg-ngt;
+}
+
+@media screen and (max-width: 500px) {
+
+  body {
+    text-align: left;
+  }
+
+  div.fancy-positioning div.picture-left,
+  div.fancy-positioning div.tleft {
+    float: none;
+    width: inherit;
+  }
+
+  blockquote span {
+    width: 80%;
+  }
+}
+
+img#logo,
+img#theme-icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+img#theme-icon {
+  float: right;
+  cursor: pointer;
+}
+
+header {
+  border-bottom: 1px solid $clr-header-separator-day;
+  padding: 0.3rem;
+}
+
+html.night header {
+  border-bottom: 1px solid $clr-header-separator-ngt;
+}
+
+#jump-to-top {
+  position: fixed;
+  left: 0.5rem;
+  bottom: 2rem;
+}
+
+#jump-to-top img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.article {
+  margin: 0 0 2em;
+}
+
+.article h3 {
+  text-indent: 1.5em;
+}
+
+.date {
+  float: right;
+  margin: 0.4em 1em;
+  font-style: italic;
+  color: $clr-date-fg-day;
+}
+
+.article .date {
+  font-size: 0.8em;
+}
+
+html.night .date {
+  color: $clr-date-fg-ngt;
+}
+
+img.icon {
+  vertical-align: middle;
+  width: 0.8em;
+  height: 0.8em;
+  margin: 0.075em;
+}

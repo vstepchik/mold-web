@@ -1,11 +1,11 @@
-use maud::{DOCTYPE, html, Markup};
+use maud::{html, Markup, DOCTYPE};
 
 const FAVICON_URL: &str = "/favicon.ico";
-const CSS_URL: &str = "/s/style.css";
+const CSS_URL: &str = "/main.css";
 
-const LOGO_URL: &str = "/s/logo.svg";
-const THEME_ICON_URL: &str = "/s/day-and-night.svg";
-const JUMP_TO_TOP_ICON_URL: &str = "/s/top.svg";
+const LOGO_URL: &str = "/logo.svg";
+const THEME_ICON_URL: &str = "/day-and-night.svg";
+const JUMP_TO_TOP_ICON_URL: &str = "/top.svg";
 
 pub fn template_base(is_night: bool, title: &str, head: Option<Markup>, markup: Markup) -> Markup {
     html! {
@@ -35,12 +35,12 @@ fn header() -> Markup {
             a href=("/") {
                 img#logo src=(LOGO_URL) alt="Logo" width="0" height="0";
             }
-            img#themeIcon src=(THEME_ICON_URL) alt="Switch theme" width="0" height="0"
+            img#theme-icon src=(THEME_ICON_URL) alt="Switch theme" width="0" height="0"
                 onclick="document.cookie = \"night=\" + \
                 document.documentElement.classList.toggle(\"night\") + \"; path=/; \
                 expires=Fri, 31 Dec 9999 23:59:59 GMT\"";
         }
-        div#jumpToTop {
+        div#jump-to-top {
             a href="#top" { img width="0" height="0" src=(JUMP_TO_TOP_ICON_URL) alt="Jump to top"; }
         }
     }
