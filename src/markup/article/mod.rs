@@ -9,6 +9,7 @@ use crate::error::UserError;
 use crate::markup::base::template_base;
 
 mod about_mold_web;
+mod long_time_not_seen;
 
 pub async fn article(req: HttpRequest) -> Result<Markup, impl ResponseError> {
     let article_id = req.match_info().get("article_id").unwrap();
@@ -21,6 +22,7 @@ fn render_article(is_night: bool, id: &str) -> Option<Markup> {
 
 pub static ARTICLES: phf::Map<&'static str, &'static Article> = phf_map! {
     "about-mold-web" => &about_mold_web::ABOUT_MOLD_WEB,
+    "long-time-not-seen" => &long_time_not_seen::LONG_TIME_NOT_SEEN,
 };
 
 pub struct Article<'a> {
