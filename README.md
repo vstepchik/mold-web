@@ -6,6 +6,7 @@ TODO:
 * [x] For SCSS enable:
   * [x] Linters
   * [x] Postprocessors
+  * [ ] Use [SVGO](https://github.com/svg/svgo) in FE build step
 * [x] Show index page
 * [x] Show articles
 * [x] Show 404 under /a/bla if bla not found
