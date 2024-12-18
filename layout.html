@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body {
+            margin: 0;
+        }
+        p:first-child {
+            margin-top: 0;
+        }
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        header {
+            margin: auto auto;
+            display: block;
+            width: 1000px;
+            height: 40px;
+            background-color: cornflowerblue;
+            border: 1px solid dodgerblue;
+        }
+
+        footer {
+            margin: auto auto;
+            display: block;
+            width: 1000px;
+            height: 30px;
+            background-color: pink;
+            border: 1px solid hotpink;
+        }
+
+        main {
+            margin: auto auto;
+            display: block;
+            width: 960px;
+            min-height: calc(100vh - 40px - 30px - 4px);
+            background-color: lightseagreen;
+            border-width: 0 1px 0 1px;
+            border-style: solid;
+            border-color: seagreen;
+        }
+    </style>
+</head>
+<body>
+<header>
+    Header
+    <button onclick="const e = document.createElement('p'); e.innerText = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'; document.getElementById('content').appendChild(e);">
+        moar text
+    </button>
+</header>
+<main id="content">
+    <p>a</p>
+</main>
+<footer>Footer</footer>
+</body>
+</html>
