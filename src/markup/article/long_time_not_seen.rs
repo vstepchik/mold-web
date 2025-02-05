@@ -81,7 +81,7 @@ fn body() -> Markup {
             "and derived a limited set of colors to use."
         }
         p {
-            "Another piece of inspiration for the future design comes from " 
+            "Another piece of inspiration for the future design comes from "
             a href="https://www.versionmuseum.com/history-of/classic-mac-os" target="_blank" rel="noopener noreferrer" { "MacOS 1-8" } ". "
             "Particularly I like the clear straight lines, use of limited palettes, dithering, and play with contrast."
         }

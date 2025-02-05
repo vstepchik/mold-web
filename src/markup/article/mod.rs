@@ -13,7 +13,10 @@ mod long_time_not_seen;
 
 pub async fn article(req: HttpRequest) -> Result<Markup, impl ResponseError> {
     let article_id = req.match_info().get("article_id").unwrap();
-    render_article(is_night_theme(&req), article_id).ok_or(UserError::ResourceNotFound { resource: req.uri().to_string(), is_night: is_night_theme(&req) })
+    render_article(is_night_theme(&req), article_id).ok_or(UserError::ResourceNotFound {
+        resource: req.uri().to_string(),
+        is_night: is_night_theme(&req),
+    })
 }
 
 fn render_article(is_night: bool, id: &str) -> Option<Markup> {
