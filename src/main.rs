@@ -113,4 +113,23 @@ mod integration_tests {
         let body_str = std::str::from_utf8(&body).unwrap();
         assert!(body_str.to_lowercase().contains("404"));
     }
+
+    #[actix_web::test]
+    async fn test_known_article_get() {
+        let app = test::init_service(App::new().configure(config::configuration)).await;
+
+        let req = test::TestRequest::default()
+            .uri("/a/about-mold-web.html")
+            .to_request();
+        let resp = test::call_service(&app, req).await;
+
+        assert!(resp.status().is_success());
+        assert_eq!(
+            resp.headers().get(header::CONTENT_TYPE).expect("No Content-Type header"),
+            "text/html; charset=utf-8"
+        );
+        let body = test::read_body(resp).await;
+        let body_str = std::str::from_utf8(&body).expect("No response body");
+        assert!(body_str.contains("About this site"));  // Check for actual article title
+    }
 }
