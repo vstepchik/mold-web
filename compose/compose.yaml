@@ -1,12 +1,29 @@
 services:
   nginx:
-    image: nginx:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx-alpine
     ports:
       - "8080:80"
+      - "8443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - certbot_certs:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
     depends_on:
       - mold-web
+    networks:
+      - mold-net
+    user: root # Need root for binding to privileged ports and cert access
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - certbot_certs:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    depends_on:
+      - nginx
     networks:
       - mold-net
 
@@ -40,4 +57,8 @@ networks:
 
 volumes:
   postgres_data:
+    driver: local
+  certbot_certs:
+    driver: local
+  certbot_www:
     driver: local

@@ -1,0 +1,39 @@
+set dotenv-load
+
+image_name := "nginx-brotli-http3"
+nginx_version := env_var_or_default("NGINX_VERSION", "1.29.0")
+
+default: build
+
+build:
+    docker build --no-cache -t {{image_name}}:latest -t {{image_name}}:{{nginx_version}} .
+
+build-cached:
+    docker build -t {{image_name}}:latest -t {{image_name}}:{{nginx_version}} .
+
+run:
+    docker run --rm -p 8080:80 --name nginx-test {{image_name}}:latest
+
+stop:
+    docker stop nginx-test || true
+
+clean:
+    docker rmi {{image_name}}:latest {{image_name}}:{{nginx_version}} || true
+
+clean-all: clean
+    docker system prune -f
+
+test:
+    docker run --rm {{image_name}}:latest nginx -t
+
+shell:
+    docker run --rm -it --entrypoint /bin/sh {{image_name}}:latest
+
+logs:
+    docker logs -f nginx-test || echo "Container not running"
+
+info:
+    @echo "Image: {{image_name}}"
+    @echo "Version: {{nginx_version}}"
+    @echo "Tag: {{image_name}}:{{nginx_version}}"
+    docker images {{image_name}} || true
